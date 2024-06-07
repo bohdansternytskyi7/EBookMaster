@@ -30,14 +30,14 @@ namespace MedicalFacility.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromQuery] LoginRequestDTO loginRequest)
+        public async Task<IActionResult> Register([FromQuery] RegisterRequestDTO registerRequest)
         {
             var salt = GenerateSalt();
-            var hashedPassword = HashPassword(loginRequest.Password, salt);
+            var hashedPassword = HashPassword(registerRequest.Password, salt);
             await _context.Users.AddAsync(new User {
-                Name = loginRequest.Name,
-                Surname = loginRequest.Surname,
-                Email = loginRequest.Email,
+                Name = registerRequest.Name,
+                Surname = registerRequest.Surname,
+                Email = registerRequest.Email,
                 Password = hashedPassword,
                 Salt = salt,
                 Role = Role.Reader,
@@ -94,17 +94,6 @@ namespace MedicalFacility.Controllers
             });
         }
 
-        private JwtSecurityToken GenerateAccessToken()
-        {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecretKey"]));
-            return new JwtSecurityToken(
-                issuer: _configuration.GetSection("JwtSettings:ValidIssuer").Value,
-                audience: _configuration.GetSection("JwtSettings:ValidAudience").Value,
-                expires: DateTime.Now.AddMinutes(5),
-                signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
-            );
-        }
-
         private static string GenerateSalt()
         {
             using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
@@ -125,11 +114,21 @@ namespace MedicalFacility.Controllers
                 numBytesRequested: 32));
         }
 
+        private JwtSecurityToken GenerateAccessToken()
+        {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecretKey"]));
+            return new JwtSecurityToken(
+                issuer: _configuration.GetSection("JwtSettings:ValidIssuer").Value,
+                audience: _configuration.GetSection("JwtSettings:ValidAudience").Value,
+                expires: DateTime.Now.AddMinutes(5),
+                signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+            );
+        }
+
         private async Task<int> GetNexLibraryCardNumber()
         {
 			var libraryCardNumbers = await _context.Users.Select(x => x.LibraryCardNumber).ToListAsync();
-			var lastNumber = libraryCardNumbers.Any() ? libraryCardNumbers.Max() : 0;
-			return lastNumber + 1;
+			return (libraryCardNumbers.Any() ? libraryCardNumbers.Max() : 0) + 1;
         }
     }
 }
