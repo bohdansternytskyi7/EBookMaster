@@ -10,12 +10,12 @@ namespace EBookMaster.Models
 
 		[Required]
 		[MaxLength(100)]
-		public required string Description { get; set; }
+		public string Description { get; set; }
 
 		[Required]
 		public int BookBorrowingId { get; set; }
 
 		[ForeignKey(nameof(BookBorrowingId))]
-		public required BookBorrowing BookBorrowing { get; set; }
+		public BookBorrowing BookBorrowing { get; set; }
 	}
 }

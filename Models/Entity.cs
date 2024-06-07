@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EBookMaster.Models
 {
-    public class Entity
+    public abstract class Entity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

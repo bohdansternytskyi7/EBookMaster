@@ -8,11 +8,23 @@ namespace EBookMaster.Models
 	{
 		[Required]
 		[MaxLength(100)]
-		public required string Email { get; set; }
+		public string Email { get; set; }
 
 		[Required]
-		[MaxLength(100)]
-		public required string LibraryCardNumber { get; set; }
+		[MaxLength(256)]
+		public string Password { get; set; }
+
+		[Required]
+		[MaxLength(256)]
+		public string Salt { get; set; }
+
+		[MaxLength(256)]
+		public string? RefreshToken { get; set; }
+
+		public DateTime? RefreshTokenExpiration { get; set; }
+
+		[Required]
+		public int LibraryCardNumber { get; set; }
 
 		[Required]
 		public Role Role { get; set; }
@@ -21,7 +33,7 @@ namespace EBookMaster.Models
 		public int SubscriptionId { get; set; }
 
 		[ForeignKey(nameof(SubscriptionId))]
-		public required Subscription Subscription { get; set; }
+		public Subscription Subscription { get; set; }
 
 		public ICollection<BookBorrowing> BookBorrowings { get; set; } = new List<BookBorrowing>();
 	}

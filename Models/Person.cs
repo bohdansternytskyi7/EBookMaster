@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EBookMaster.Models
 {
@@ -7,9 +6,9 @@ namespace EBookMaster.Models
 	{
 		[Required]
 		[MaxLength(100)]
-		public required string Name { get; set; }
+		public string Name { get; set; }
 		[Required]
 		[MaxLength(100)]
-		public required string Surname { get; set; }
+		public string Surname { get; set; }
 	}
 }

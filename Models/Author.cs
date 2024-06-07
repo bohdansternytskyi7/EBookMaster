@@ -9,7 +9,7 @@ namespace EBookMaster.Models
 
 		[Required]
 		[MaxLength(100)]
-		public required string Nationality { get; set; }
+		public string Nationality { get; set; }
 
 		public ICollection<Book> Books { get; set; } = new List<Book>();
 	}

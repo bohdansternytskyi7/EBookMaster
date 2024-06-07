@@ -7,14 +7,14 @@ namespace EBookMaster.Models
 	{
 		[Required]
 		[MaxLength(100)]
-		public required string Title { get; set; }
+		public string Title { get; set; }
 
 		[Required]
 		public int PublishingHouseId { get; set; }
 
 
 		[ForeignKey(nameof(PublishingHouseId))]
-		public required PublishingHouse PublishingHouse { get; set; }
+		public PublishingHouse PublishingHouse { get; set; }
 
 		[Required]
 		public DateTime PublicationYear { get; set; }

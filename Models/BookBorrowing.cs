@@ -15,18 +15,12 @@ namespace EBookMaster.Models
 		public int BookId { get; set; }
 
 		[ForeignKey(nameof(BookId))]
-		public required Book Book { get; set; }
+		public Book Book { get; set; }
 
 		[Required]
 		public int UserId { get; set; }
 
 		[ForeignKey(nameof(UserId))]
-		public required User User { get; set; }
-
-		public int? ReviewId { get; set; }
-
-		[ForeignKey(nameof(ReviewId))]
-		public Review? Review { get; set; }
-
+		public User User { get; set; }
 	}
 }

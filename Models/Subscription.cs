@@ -12,6 +12,6 @@ namespace EBookMaster.Models
 		public SubscriptionPeriod Period { get; set; }
 
 		[Required]
-		public double Price { get; set; }
+		public decimal Price { get; set; }
 	}
 }

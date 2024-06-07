@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>b52bda53-34b2-421a-8794-e09a63febbcf</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,9 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="DTOs\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,17 @@
 using EBookMaster.Mapping;
+using EBookMaster.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<MainDbContext>(opt =>
+{
+	opt.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings:DefaultConnection").Value);
+});
 
 builder.Services.AddControllers().AddJsonOptions(opt =>
 {
