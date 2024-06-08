@@ -41,18 +41,20 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.label1.Location = new System.Drawing.Point(99, 148);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(50, 16);
+			this.label1.Size = new System.Drawing.Size(62, 20);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Email:";
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
+			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.label2.Location = new System.Drawing.Point(99, 187);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(79, 16);
+			this.label2.Size = new System.Drawing.Size(97, 20);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Password:";
 			// 
@@ -73,6 +75,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.label3.Location = new System.Drawing.Point(102, 51);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(142, 25);
@@ -81,6 +84,7 @@
 			// 
 			// btnLogin
 			// 
+			this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.btnLogin.Location = new System.Drawing.Point(217, 256);
 			this.btnLogin.Name = "btnLogin";
 			this.btnLogin.Size = new System.Drawing.Size(125, 41);
