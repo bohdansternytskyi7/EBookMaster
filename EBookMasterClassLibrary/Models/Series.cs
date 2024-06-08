@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace EBookMaster.Models
+namespace EBookMasterClassLibrary.Models
 {
 	public class Series : Entity
 	{

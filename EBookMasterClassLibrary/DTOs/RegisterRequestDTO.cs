@@ -1,4 +1,4 @@
-﻿namespace EBookMaster.DTOs
+﻿namespace EBookMasterClassLibrary.DTOs
 {
 	public class RegisterRequestDTO
 	{

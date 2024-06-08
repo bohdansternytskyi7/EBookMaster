@@ -1,7 +1,7 @@
-﻿using EBookMaster.Enums;
+﻿using EBookMasterClassLibrary.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace EBookMaster.Models
+namespace EBookMasterClassLibrary.Models
 {
 	public class Subscription : Entity
 	{

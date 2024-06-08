@@ -1,5 +1,6 @@
-﻿using EBookMaster.Enums;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using EBookMasterClassLibrary.Enums;
+using EBookMasterClassLibrary.Models;
 
 namespace EBookMaster.Models
 {
@@ -131,7 +132,8 @@ namespace EBookMaster.Models
 			modelBuilder.Entity<User>(e =>
 			{
 				e.HasData(
-					new User {
+					new User
+					{
 						Id = 1,
 						Name = "Edward",
 						Surname = "Norton",
@@ -140,7 +142,8 @@ namespace EBookMaster.Models
 						Salt = "CTQnUwx4k4fhjcapvGoAlh96jMgz6zUHCfF6W7GH3oc=",
 						LibraryCardNumber = 1,
 						Role = Role.Librarian,
-						SubscriptionId = 4 }
+						SubscriptionId = 4
+					}
 				);
 			});
 
@@ -160,9 +163,9 @@ namespace EBookMaster.Models
 			{
 				var index = 1;
 				e.HasData(
-					new Review { Id=index++, Rate = 4, Description = "Great book, highly recommended!", BookBorrowingId = 1 },
-					new Review { Id=index++, Rate = 3, Description = "Interesting read, but could be improved.", BookBorrowingId = 2 },
-					new Review { Id=index++, Rate = 5, Description = "Absolutely loved it, couldn't put it down!", BookBorrowingId = 3 }
+					new Review { Id = index++, Rate = 4, Description = "Great book, highly recommended!", BookBorrowingId = 1 },
+					new Review { Id = index++, Rate = 3, Description = "Interesting read, but could be improved.", BookBorrowingId = 2 },
+					new Review { Id = index++, Rate = 5, Description = "Absolutely loved it, couldn't put it down!", BookBorrowingId = 3 }
 				);
 			});
 		}

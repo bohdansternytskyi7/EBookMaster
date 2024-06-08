@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using EBookMasterClassLibrary.Models;
 using EBookMasterGUI.DTOs;
 using Newtonsoft.Json;
 
@@ -47,7 +48,7 @@ public class ApiService
 		if (response.IsSuccessStatusCode)
 		{
 			var result = await response.Content.ReadAsStringAsync();
-			var books = JsonConvert.DeserializeObject<List<BookDTO>>(result);
+			var books = JsonConvert.DeserializeObject<List<Book>>(result);
 			return null;
 		}
 		return null;

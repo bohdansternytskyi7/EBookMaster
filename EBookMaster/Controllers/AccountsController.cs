@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using EBookMaster.DTOs;
-using EBookMaster.Enums;
-using EBookMaster.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +6,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Text;
+using AutoMapper;
+using EBookMasterClassLibrary.Enums;
+using EBookMaster.Models;
+using EBookMasterClassLibrary.DTOs;
+using EBookMasterClassLibrary.Models;
 
 namespace MedicalFacility.Controllers
 {
@@ -40,7 +41,7 @@ namespace MedicalFacility.Controllers
                 Email = registerRequest.Email,
                 Password = hashedPassword,
                 Salt = salt,
-                Role = Role.Reader,
+				Role = Role.Reader,
                 SubscriptionId = 1,
                 LibraryCardNumber = await GetNexLibraryCardNumberAsync()
 			});

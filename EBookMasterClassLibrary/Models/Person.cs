@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EBookMaster.Models
+namespace EBookMasterClassLibrary.Models
 {
 	public abstract class Person : Entity
 	{

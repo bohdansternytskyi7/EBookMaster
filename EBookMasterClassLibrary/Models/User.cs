@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using EBookMaster.Enums;
+using EBookMasterClassLibrary.Enums;
 
-namespace EBookMaster.Models
+namespace EBookMasterClassLibrary.Models
 {
     public class User : Person
 	{
@@ -19,7 +21,7 @@ namespace EBookMaster.Models
 		public string Salt { get; set; }
 
 		[MaxLength(256)]
-		public string? RefreshToken { get; set; }
+		public string RefreshToken { get; set; }
 
 		public DateTime? RefreshTokenExpiration { get; set; }
 

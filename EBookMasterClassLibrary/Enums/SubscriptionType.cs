@@ -1,4 +1,4 @@
-﻿namespace EBookMaster.Enums
+﻿namespace EBookMasterClassLibrary.Enums
 {
 	public enum SubscriptionType
 	{

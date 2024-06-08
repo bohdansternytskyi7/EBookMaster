@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EBookMaster.Models
+namespace EBookMasterClassLibrary.Models
 {
 	public class Book : Entity
 	{
@@ -22,7 +24,7 @@ namespace EBookMaster.Models
 		public int? SeriesId { get; set; }
 
 		[ForeignKey(nameof(SeriesId))]
-		public Series? Series { get; set; }
+		public Series Series { get; set; }
 
 		public ICollection<Author> Authors { get; set; } = new List<Author>();
 
