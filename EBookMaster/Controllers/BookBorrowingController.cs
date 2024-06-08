@@ -19,10 +19,15 @@ namespace EBookMaster.Controllers
 			_mapper = mapper;
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> GetBookBorrowingsAsync()
+		[HttpGet("books")]
+		public async Task<IActionResult> GetBooksAsync()
 		{
-			var bookBorrowings = await _context.BookBorrowings.ToListAsync();
+			var bookBorrowings = await _context.Books
+				.Include(x => x.PublishingHouse)
+				.Include(x => x.Series)
+				.Include(x => x.Authors)
+				.Include(x => x.Categories)
+				.ToListAsync();
 			return Ok(bookBorrowings);
 		}
 	}

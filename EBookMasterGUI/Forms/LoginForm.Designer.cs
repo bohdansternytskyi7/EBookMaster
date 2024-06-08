@@ -52,7 +52,7 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.label2.Location = new System.Drawing.Point(99, 187);
+			this.label2.Location = new System.Drawing.Point(99, 184);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(97, 20);
 			this.label2.TabIndex = 1;
@@ -60,23 +60,25 @@
 			// 
 			// txtEmail
 			// 
-			this.txtEmail.Location = new System.Drawing.Point(217, 148);
+			this.txtEmail.Location = new System.Drawing.Point(238, 148);
+			this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.txtEmail.Name = "txtEmail";
-			this.txtEmail.Size = new System.Drawing.Size(125, 22);
+			this.txtEmail.Size = new System.Drawing.Size(156, 22);
 			this.txtEmail.TabIndex = 3;
 			// 
 			// txtPassword
 			// 
-			this.txtPassword.Location = new System.Drawing.Point(217, 187);
+			this.txtPassword.Location = new System.Drawing.Point(238, 184);
+			this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.txtPassword.Name = "txtPassword";
-			this.txtPassword.Size = new System.Drawing.Size(125, 22);
+			this.txtPassword.Size = new System.Drawing.Size(156, 22);
 			this.txtPassword.TabIndex = 4;
 			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
 			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.label3.Location = new System.Drawing.Point(102, 51);
+			this.label3.Location = new System.Drawing.Point(98, 67);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(142, 25);
 			this.label3.TabIndex = 5;
@@ -85,9 +87,9 @@
 			// btnLogin
 			// 
 			this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.btnLogin.Location = new System.Drawing.Point(217, 256);
+			this.btnLogin.Location = new System.Drawing.Point(238, 251);
 			this.btnLogin.Name = "btnLogin";
-			this.btnLogin.Size = new System.Drawing.Size(125, 41);
+			this.btnLogin.Size = new System.Drawing.Size(156, 41);
 			this.btnLogin.TabIndex = 6;
 			this.btnLogin.Text = "Login";
 			this.btnLogin.UseVisualStyleBackColor = true;
@@ -97,7 +99,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(554, 413);
+			this.ClientSize = new System.Drawing.Size(563, 417);
 			this.Controls.Add(this.btnLogin);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.txtPassword);

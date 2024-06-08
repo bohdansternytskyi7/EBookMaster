@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using EBookMasterGUI.DTOs;
+using Newtonsoft.Json;
 
 public class ApiService
 {
 	private readonly HttpClient _httpClient;
+	public string AccessToken { get; private set; }
+	public string RefreshToken { get; private set; }
 
 	public ApiService()
 	{
@@ -20,7 +25,30 @@ public class ApiService
 		var response = await _httpClient.PostAsync($"api/accounts/login?email={email}&password={password}", null);
 		if (response.IsSuccessStatusCode)
 		{
-			return await response.Content.ReadAsStringAsync();
+			var result = await response.Content.ReadAsStringAsync();
+			var loginResponse = JsonConvert.DeserializeObject<LoginResponseDTO>(result);
+			AccessToken = loginResponse.AccessToken;
+			RefreshToken = loginResponse.RefreshToken;
+			return result;
+		}
+		return null;
+	}
+
+	public async Task<BookDTO> GetBooksAsync()
+	{
+		if (string.IsNullOrEmpty(AccessToken))
+		{
+			throw new InvalidOperationException("Access token is not available. Please login first.");
+		}
+
+		_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+
+		var response = await _httpClient.GetAsync("api/bookborrowing/books");
+		if (response.IsSuccessStatusCode)
+		{
+			var result = await response.Content.ReadAsStringAsync();
+			var books = JsonConvert.DeserializeObject<List<BookDTO>>(result);
+			return null;
 		}
 		return null;
 	}

@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Windows.Forms;
+using EBookMasterGUI.Forms;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EBookMasterGUI
 {
 	public partial class LoginForm : Form
 	{
 		private readonly ApiService _apiService;
+		private readonly IServiceProvider _serviceProvider;
 
-		public LoginForm()
+		public LoginForm(ApiService apiService, IServiceProvider serviceProvider)
 		{
 			InitializeComponent();
-			_apiService = new ApiService();
+			_apiService = apiService;
+			_serviceProvider = serviceProvider;
 		}
 
 		private async void btnLogin_Click(object sender, EventArgs e)
@@ -27,8 +31,8 @@ namespace EBookMasterGUI
 			var result = await _apiService.LoginAsync(email, password);
 			if (result != null)
 			{
-				MessageBox.Show("Login successful!");
-
+				this.Hide();
+				_serviceProvider.GetRequiredService<MainForm>().Show();
 			}
 			else
 			{
