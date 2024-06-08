@@ -30,7 +30,7 @@ namespace MedicalFacility.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromQuery] RegisterRequestDTO registerRequest)
+        public async Task<IActionResult> RegisterAsync([FromQuery] RegisterRequestDTO registerRequest)
         {
             var salt = GenerateSalt();
             var hashedPassword = HashPassword(registerRequest.Password, salt);
@@ -42,7 +42,7 @@ namespace MedicalFacility.Controllers
                 Salt = salt,
                 Role = Role.Reader,
                 SubscriptionId = 1,
-                LibraryCardNumber = await GetNexLibraryCardNumber()
+                LibraryCardNumber = await GetNexLibraryCardNumberAsync()
 			});
             await _context.SaveChangesAsync();
             return Ok();
@@ -50,7 +50,7 @@ namespace MedicalFacility.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromQuery] LoginRequestDTO loginRequest)
+        public async Task<IActionResult> LoginAsync([FromQuery] LoginRequestDTO loginRequest)
         {
             var user = await _context.Users.Where(x => x.Email == loginRequest.Email).FirstOrDefaultAsync();
             var hashedPassword = HashPassword(loginRequest.Password, user.Salt);
@@ -72,7 +72,7 @@ namespace MedicalFacility.Controllers
 
         [AllowAnonymous]
         [HttpPost("refresh")]
-        public async Task<IActionResult> RefreshToken([FromBody] string refreshTokenRequest)
+        public async Task<IActionResult> RefreshTokenAsync([FromBody] string refreshTokenRequest)
         {
             var user = await _context.Users.SingleOrDefaultAsync(x => x.RefreshToken == refreshTokenRequest);
 
@@ -125,7 +125,7 @@ namespace MedicalFacility.Controllers
             );
         }
 
-        private async Task<int> GetNexLibraryCardNumber()
+        private async Task<int> GetNexLibraryCardNumberAsync()
         {
 			var libraryCardNumbers = await _context.Users.Select(x => x.LibraryCardNumber).ToListAsync();
 			return (libraryCardNumbers.Any() ? libraryCardNumbers.Max() : 0) + 1;
