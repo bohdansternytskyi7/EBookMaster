@@ -15,7 +15,7 @@ namespace EBookMasterGUI.Forms
 
 		private async void LoadBooksAsync()
 		{
-			BooksDataGrid.DataSource = await _apiService.GetBooksAsync();
+			BookListGridView.DataSource = await _apiService.GetBooksAsync();
 		}
 	}
 }

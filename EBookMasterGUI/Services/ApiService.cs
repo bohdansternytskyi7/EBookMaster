@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ public class ApiService
 		return null;
 	}
 
-	public async Task<BookDTO> GetBooksAsync()
+	public async Task<List<BookDTO>> GetBooksAsync()
 	{
 		if (string.IsNullOrEmpty(AccessToken))
 		{
@@ -49,7 +50,15 @@ public class ApiService
 		{
 			var result = await response.Content.ReadAsStringAsync();
 			var books = JsonConvert.DeserializeObject<List<Book>>(result);
-			return null;
+			return books.Select(x => new BookDTO
+			{
+				Title = x.Title,
+				Authors = string.Join(", ", x.Authors.Select(y => y.Name)),
+				PublishingHouse = x.PublishingHouse.Name,
+				PublicationYear = x.PublicationYear.Year,
+				Series = x.Series?.Name ?? "",
+				Categories = string.Join(", ", x.Categories.Select(y => y.Name)),
+			}).ToList();
 		}
 		return null;
 	}
