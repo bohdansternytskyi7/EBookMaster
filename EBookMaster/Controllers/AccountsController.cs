@@ -54,6 +54,12 @@ namespace MedicalFacility.Controllers
         public async Task<IActionResult> LoginAsync([FromQuery] LoginRequestDTO loginRequest)
         {
             var user = await _context.Users.Where(x => x.Email == loginRequest.Email).FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
             var hashedPassword = HashPassword(loginRequest.Password, user.Salt);
 
             if (hashedPassword != user.Password)

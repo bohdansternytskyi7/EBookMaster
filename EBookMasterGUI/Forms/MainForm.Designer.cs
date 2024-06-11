@@ -34,13 +34,17 @@
 			// 
 			// BookListGridView
 			// 
+			this.BookListGridView.AllowUserToAddRows = false;
+			this.BookListGridView.AllowUserToDeleteRows = false;
 			this.BookListGridView.AllowUserToOrderColumns = true;
 			this.BookListGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.BookListGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 			this.BookListGridView.ColumnHeadersHeight = 29;
 			this.BookListGridView.Location = new System.Drawing.Point(12, -59);
+			this.BookListGridView.MultiSelect = false;
 			this.BookListGridView.Name = "BookListGridView";
+			this.BookListGridView.ReadOnly = true;
 			this.BookListGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
 			this.BookListGridView.RowTemplate.Height = 24;
 			this.BookListGridView.Size = new System.Drawing.Size(1642, 1000);
