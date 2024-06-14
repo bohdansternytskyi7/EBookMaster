@@ -5,7 +5,6 @@ using EBookMasterClassLibrary.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using EBookMasterClassLibrary.Models;
 
@@ -60,12 +59,12 @@ namespace EBookMaster.Controllers
 
 			if (user!.Subscription.Type != SubscriptionType.Premium)
 			{
-				return BadRequest("Brak subskrypcji 'Premium'.");
+				return BadRequest("No 'Premium' subscription.");
 			}
 
 			if (_context.BookBorrowings.Where(x => x.BookId == book.Id && x.UserId == user.Id && x.ReturnDate == null).Any())
 			{
-				return BadRequest("Książka jest już wypożyczona!");
+				return BadRequest("The book is already on loan.");
 			}
 
 			_context.BookBorrowings.Add(new BookBorrowing() {

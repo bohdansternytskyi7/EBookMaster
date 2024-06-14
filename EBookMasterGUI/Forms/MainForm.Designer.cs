@@ -49,7 +49,8 @@
 			this.BookListGridView.ReadOnly = true;
 			this.BookListGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
 			this.BookListGridView.RowTemplate.Height = 24;
-			this.BookListGridView.Size = new System.Drawing.Size(1635, 487);
+			this.BookListGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
+			this.BookListGridView.Size = new System.Drawing.Size(1635, 10);
 			this.BookListGridView.TabIndex = 0;
 			// 
 			// MainForm

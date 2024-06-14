@@ -18,9 +18,10 @@ namespace EBookMasterGUI.Forms
 		{
 			BookListGridView.DataSource = await _apiService.GetBooksAsync();
 			BookListGridView.CellDoubleClick += BookListGridView_CellDoubleClick;
+			AdjustDataGridViewHeight();
 		}
 
-		private async void BookListGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		private void BookListGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
 			if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
 			{
@@ -34,6 +35,18 @@ namespace EBookMasterGUI.Forms
 					_apiService.BorrowBookAsync(title, authors);
 				}
 			}
+		}
+
+		private void AdjustDataGridViewHeight()
+		{
+			int totalHeight = BookListGridView.ColumnHeadersHeight;
+
+			foreach (DataGridViewRow row in BookListGridView.Rows)
+			{
+				totalHeight += row.Height;
+			}
+
+			BookListGridView.Height = totalHeight;
 		}
 	}
 }
