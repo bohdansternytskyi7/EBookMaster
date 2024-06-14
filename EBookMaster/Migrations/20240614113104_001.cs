@@ -196,7 +196,7 @@ namespace EBookMaster.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BorrowingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BookId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -299,7 +299,7 @@ namespace EBookMaster.Migrations
                     { 1, 1, 9.99m, 1 },
                     { 2, 1, 14.99m, 2 },
                     { 3, 2, 100m, 1 },
-                    { 4, 2, 150m, 1 }
+                    { 4, 2, 150m, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -317,7 +317,11 @@ namespace EBookMaster.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "LibraryCardNumber", "Name", "Password", "RefreshToken", "RefreshTokenExpiration", "Role", "Salt", "SubscriptionId", "Surname" },
-                values: new object[] { 1, "edward.norton@example.com", 1, "Edward", "j45qsKROWKfK0uVI9jMPE715FxLsHJlFjy763a1J87I=", null, null, 1, "CTQnUwx4k4fhjcapvGoAlh96jMgz6zUHCfF6W7GH3oc=", 4, "Norton" });
+                values: new object[,]
+                {
+                    { 1, "edward.norton@example.com", 1, "Edward", "j45qsKROWKfK0uVI9jMPE715FxLsHJlFjy763a1J87I=", null, null, 1, "CTQnUwx4k4fhjcapvGoAlh96jMgz6zUHCfF6W7GH3oc=", 4, "Norton" },
+                    { 2, "bob.smith@example.com", 2, "Bob", "1+6ZWj3IELv5O094yvYHaVeg2325ZE51Ohcq0nAltWk=", null, null, 2, "IbnE7HGY7KlUn3vW0ZwaO3B9jNZEF9CRX5nPH2tb6CU=", 1, "Smith" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AuthorBook",
@@ -336,11 +340,11 @@ namespace EBookMaster.Migrations
                 columns: new[] { "Id", "BookId", "BorrowingDate", "ReturnDate", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 2, new DateTime(2024, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, 3, new DateTime(2024, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 3, 4, new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 4, 2, new DateTime(2024, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 5, 1, new DateTime(2024, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 }
+                    { 1, 2, new DateTime(2023, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, 3, new DateTime(2023, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 3, 4, new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 4, 2, new DateTime(2023, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 5, 1, new DateTime(2023, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 }
                 });
 
             migrationBuilder.InsertData(

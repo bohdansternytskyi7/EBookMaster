@@ -3,6 +3,8 @@ using System;
 using EBookMaster.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
@@ -104,7 +106,7 @@ namespace EBookMaster.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.Author", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -217,7 +219,7 @@ namespace EBookMaster.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.Book", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -289,7 +291,7 @@ namespace EBookMaster.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.BookBorrowing", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.BookBorrowing", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -303,7 +305,7 @@ namespace EBookMaster.Migrations
                     b.Property<DateTime>("BorrowingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ReturnDate")
+                    b.Property<DateTime?>("ReturnDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
@@ -322,45 +324,45 @@ namespace EBookMaster.Migrations
                         {
                             Id = 1,
                             BookId = 2,
-                            BorrowingDate = new DateTime(2024, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2024, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2023, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2023, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
                             BookId = 3,
-                            BorrowingDate = new DateTime(2024, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2024, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2023, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2023, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 3,
                             BookId = 4,
-                            BorrowingDate = new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2024, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2023, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 4,
                             BookId = 2,
-                            BorrowingDate = new DateTime(2024, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2024, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2023, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2023, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 5,
                             BookId = 1,
-                            BorrowingDate = new DateTime(2024, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2023, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         });
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.Category", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -415,7 +417,7 @@ namespace EBookMaster.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.PublishingHouse", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.PublishingHouse", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -478,7 +480,7 @@ namespace EBookMaster.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.Review", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -527,7 +529,7 @@ namespace EBookMaster.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.Series", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Series", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -572,7 +574,7 @@ namespace EBookMaster.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.Subscription", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Subscription", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -620,11 +622,11 @@ namespace EBookMaster.Migrations
                             Id = 4,
                             Period = 2,
                             Price = 150m,
-                            Type = 1
+                            Type = 2
                         });
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.User", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -691,18 +693,30 @@ namespace EBookMaster.Migrations
                             Salt = "CTQnUwx4k4fhjcapvGoAlh96jMgz6zUHCfF6W7GH3oc=",
                             SubscriptionId = 4,
                             Surname = "Norton"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "bob.smith@example.com",
+                            LibraryCardNumber = 2,
+                            Name = "Bob",
+                            Password = "1+6ZWj3IELv5O094yvYHaVeg2325ZE51Ohcq0nAltWk=",
+                            Role = 2,
+                            Salt = "IbnE7HGY7KlUn3vW0ZwaO3B9jNZEF9CRX5nPH2tb6CU=",
+                            SubscriptionId = 1,
+                            Surname = "Smith"
                         });
                 });
 
             modelBuilder.Entity("AuthorBook", b =>
                 {
-                    b.HasOne("EBookMaster.Models.Author", null)
+                    b.HasOne("EBookMasterClassLibrary.Models.Author", null)
                         .WithMany()
                         .HasForeignKey("AuthorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EBookMaster.Models.Book", null)
+                    b.HasOne("EBookMasterClassLibrary.Models.Book", null)
                         .WithMany()
                         .HasForeignKey("BooksId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -711,28 +725,28 @@ namespace EBookMaster.Migrations
 
             modelBuilder.Entity("BookCategory", b =>
                 {
-                    b.HasOne("EBookMaster.Models.Book", null)
+                    b.HasOne("EBookMasterClassLibrary.Models.Book", null)
                         .WithMany()
                         .HasForeignKey("BooksId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EBookMaster.Models.Category", null)
+                    b.HasOne("EBookMasterClassLibrary.Models.Category", null)
                         .WithMany()
                         .HasForeignKey("CategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.Book", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Book", b =>
                 {
-                    b.HasOne("EBookMaster.Models.PublishingHouse", "PublishingHouse")
+                    b.HasOne("EBookMasterClassLibrary.Models.PublishingHouse", "PublishingHouse")
                         .WithMany("Books")
                         .HasForeignKey("PublishingHouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EBookMaster.Models.Series", "Series")
+                    b.HasOne("EBookMasterClassLibrary.Models.Series", "Series")
                         .WithMany("Books")
                         .HasForeignKey("SeriesId");
 
@@ -741,15 +755,15 @@ namespace EBookMaster.Migrations
                     b.Navigation("Series");
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.BookBorrowing", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.BookBorrowing", b =>
                 {
-                    b.HasOne("EBookMaster.Models.Book", "Book")
+                    b.HasOne("EBookMasterClassLibrary.Models.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EBookMaster.Models.User", "User")
+                    b.HasOne("EBookMasterClassLibrary.Models.User", "User")
                         .WithMany("BookBorrowings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -760,9 +774,9 @@ namespace EBookMaster.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.Review", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Review", b =>
                 {
-                    b.HasOne("EBookMaster.Models.BookBorrowing", "BookBorrowing")
+                    b.HasOne("EBookMasterClassLibrary.Models.BookBorrowing", "BookBorrowing")
                         .WithMany()
                         .HasForeignKey("BookBorrowingId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -771,9 +785,9 @@ namespace EBookMaster.Migrations
                     b.Navigation("BookBorrowing");
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.User", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.User", b =>
                 {
-                    b.HasOne("EBookMaster.Models.Subscription", "Subscription")
+                    b.HasOne("EBookMasterClassLibrary.Models.Subscription", "Subscription")
                         .WithMany()
                         .HasForeignKey("SubscriptionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -782,17 +796,17 @@ namespace EBookMaster.Migrations
                     b.Navigation("Subscription");
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.PublishingHouse", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.PublishingHouse", b =>
                 {
                     b.Navigation("Books");
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.Series", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Series", b =>
                 {
                     b.Navigation("Books");
                 });
 
-            modelBuilder.Entity("EBookMaster.Models.User", b =>
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.User", b =>
                 {
                     b.Navigation("BookBorrowings");
                 });

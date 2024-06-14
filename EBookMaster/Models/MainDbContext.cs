@@ -125,24 +125,37 @@ namespace EBookMaster.Models
 					new Subscription { Id = index++, Type = SubscriptionType.Standard, Period = SubscriptionPeriod.Monthly, Price = 9.99m },
 					new Subscription { Id = index++, Type = SubscriptionType.Premium, Period = SubscriptionPeriod.Monthly, Price = 14.99m },
 					new Subscription { Id = index++, Type = SubscriptionType.Standard, Period = SubscriptionPeriod.Annual, Price = 100 },
-					new Subscription { Id = index++, Type = SubscriptionType.Standard, Period = SubscriptionPeriod.Annual, Price = 150 }
+					new Subscription { Id = index++, Type = SubscriptionType.Premium, Period = SubscriptionPeriod.Annual, Price = 150 }
 				);
 			});
 
 			modelBuilder.Entity<User>(e =>
 			{
+				var index = 1;
 				e.HasData(
 					new User
 					{
-						Id = 1,
+						Id = index,
 						Name = "Edward",
 						Surname = "Norton",
 						Email = "edward.norton@example.com",
 						Password = "j45qsKROWKfK0uVI9jMPE715FxLsHJlFjy763a1J87I=",
 						Salt = "CTQnUwx4k4fhjcapvGoAlh96jMgz6zUHCfF6W7GH3oc=",
-						LibraryCardNumber = 1,
+						LibraryCardNumber = index++,
 						Role = Role.Librarian,
 						SubscriptionId = 4
+					},
+					new User
+					{
+						Id = index,
+						Name = "Bob",
+						Surname = "Smith",
+						Email = "bob.smith@example.com",
+						Password = "1+6ZWj3IELv5O094yvYHaVeg2325ZE51Ohcq0nAltWk=",
+						Salt = "IbnE7HGY7KlUn3vW0ZwaO3B9jNZEF9CRX5nPH2tb6CU=",
+						LibraryCardNumber = index++,
+						Role = Role.Reader,
+						SubscriptionId = 1
 					}
 				);
 			});
@@ -151,11 +164,11 @@ namespace EBookMaster.Models
 			{
 				var index = 1;
 				e.HasData(
-					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 5, 20), ReturnDate = new DateTime(2024, 6, 20), BookId = 2, UserId = 1 },
-					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 6, 1), ReturnDate = new DateTime(2024, 7, 1), BookId = 3, UserId = 1 },
-					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 6, 10), ReturnDate = new DateTime(2024, 7, 10), BookId = 4, UserId = 1 },
-					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 7, 5), ReturnDate = new DateTime(2024, 8, 5), BookId = 2, UserId = 1 },
-					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 5, 15), ReturnDate = new DateTime(2024, 6, 15), BookId = 1, UserId = 1 }
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 5, 20), ReturnDate = new DateTime(2023, 6, 20), BookId = 2, UserId = 1 },
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 6, 1), ReturnDate = new DateTime(2023, 7, 1), BookId = 3, UserId = 1 },
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 6, 10), ReturnDate = new DateTime(2023, 7, 10), BookId = 4, UserId = 1 },
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 7, 5), ReturnDate = new DateTime(2023, 8, 5), BookId = 2, UserId = 1 },
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 5, 15), ReturnDate = new DateTime(2023, 6, 15), BookId = 1, UserId = 1 }
 				);
 			});
 

@@ -9,8 +9,7 @@ namespace EBookMasterClassLibrary.Models
 		[Required]
 		public DateTime BorrowingDate { get; set; }
 
-		[Required]
-		public DateTime ReturnDate { get; set; }
+		public DateTime? ReturnDate { get; set; }
 
 		[Required]
 		public int BookId { get; set; }

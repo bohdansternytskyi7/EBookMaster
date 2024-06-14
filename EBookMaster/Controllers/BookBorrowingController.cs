@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using EBookMasterClassLibrary.Models;
 
 namespace EBookMaster.Controllers
 {
@@ -61,6 +62,13 @@ namespace EBookMaster.Controllers
 			{
 				throw new ValidationException("Brak subskrypcji \"Premium\".");
 			}
+
+			_context.BookBorrowings.Add(new BookBorrowing() {
+				BookId = book.Id,
+				UserId = user.Id,
+				BorrowingDate = DateTime.Now
+			});
+			await _context.SaveChangesAsync();
 
 			return Ok(book);
 		}
