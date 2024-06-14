@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using EBookMasterClassLibrary.Models;
 using EBookMasterGUI.DTOs;
 using Newtonsoft.Json;
@@ -57,13 +60,22 @@ public class ApiService
 		return null;
 	}
 
-	public async Task<bool> BorrowBookAsync(string title, string authors)
+	public async void BorrowBookAsync(string title, string authors)
 	{
 		var response = await _httpClient.PostAsync($"api/bookborrowing/borrow?title={title}&authors={authors}", null);
 		if (response.IsSuccessStatusCode)
 		{
-			return true;
+			MessageBox.Show("Book borrowed successfully.", "Success", MessageBoxButtons.OK);
 		}
-		return false;
+		else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+		{
+			var errorMessage = await response.Content.ReadAsStringAsync();
+			MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+		else
+		{
+			var errorMessage = await response.Content.ReadAsStringAsync();
+			MessageBox.Show($"Error: {response.StatusCode}\n{errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
 	}
 }

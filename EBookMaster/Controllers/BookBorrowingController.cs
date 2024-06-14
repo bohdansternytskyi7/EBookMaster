@@ -60,7 +60,12 @@ namespace EBookMaster.Controllers
 
 			if (user!.Subscription.Type != SubscriptionType.Premium)
 			{
-				throw new ValidationException("Brak subskrypcji \"Premium\".");
+				return BadRequest("Brak subskrypcji 'Premium'.");
+			}
+
+			if (_context.BookBorrowings.Where(x => x.BookId == book.Id && x.UserId == user.Id && x.ReturnDate == null).Any())
+			{
+				return BadRequest("Książka jest już wypożyczona!");
 			}
 
 			_context.BookBorrowings.Add(new BookBorrowing() {

@@ -27,21 +27,11 @@ namespace EBookMasterGUI.Forms
 				var selectedRow = BookListGridView.Rows[e.RowIndex];
 				string title = selectedRow.Cells[nameof(BookDTO.Title)].Value.ToString();
 				string authors = selectedRow.Cells[nameof(BookDTO.Authors)].Value.ToString();
-				var result = MessageBox.Show($"Do you want to borrow a book '{title}' by {authors}?",
-									"Confirm",
-									MessageBoxButtons.YesNo,
-									MessageBoxIcon.Question);
+				var result = MessageBox.Show($"Do you want to borrow a book '{title}' by {authors}?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 				if (result == DialogResult.Yes)
 				{
-					if (await _apiService.BorrowBookAsync(title, authors))
-					{
-						MessageBox.Show("Book borrowed successfully.", null, MessageBoxButtons.OK);
-					}
-					else
-					{
-						MessageBox.Show("There was a problem borrowing a book. Check your subscription.", null, MessageBoxButtons.OK);
-					}
+					_apiService.BorrowBookAsync(title, authors);
 				}
 			}
 		}
