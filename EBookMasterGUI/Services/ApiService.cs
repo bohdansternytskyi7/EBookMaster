@@ -22,7 +22,7 @@ public class ApiService
 		_httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 	}
 
-	public async Task<string> LoginAsync(string email, string password)
+	public async Task<bool> LoginAsync(string email, string password)
 	{
 		var response = await _httpClient.PostAsync($"api/accounts/login?email={email}&password={password}", null);
 		if (response.IsSuccessStatusCode)
@@ -31,20 +31,14 @@ public class ApiService
 			var loginResponse = JsonConvert.DeserializeObject<LoginResponseDTO>(result);
 			AccessToken = loginResponse.AccessToken;
 			RefreshToken = loginResponse.RefreshToken;
-			return result;
+			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+			return true;
 		}
-		return null;
+		return false;
 	}
 
 	public async Task<List<BookDTO>> GetBooksAsync()
 	{
-		if (string.IsNullOrEmpty(AccessToken))
-		{
-			throw new InvalidOperationException("Access token is not available. Please login first.");
-		}
-
-		_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
-
 		var response = await _httpClient.GetAsync("api/bookborrowing/books");
 		if (response.IsSuccessStatusCode)
 		{
@@ -61,5 +55,15 @@ public class ApiService
 			}).ToList();
 		}
 		return null;
+	}
+
+	public async Task<bool> BorrowBookAsync(string title, string authors)
+	{
+		var response = await _httpClient.PostAsync($"api/bookborrowing/borrow?title={title}&authors={authors}", null);
+		if (response.IsSuccessStatusCode)
+		{
+			return true;
+		}
+		return false;
 	}
 }

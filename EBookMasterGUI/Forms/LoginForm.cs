@@ -29,7 +29,7 @@ namespace EBookMasterGUI
 			}
 
 			var result = await _apiService.LoginAsync(email, password);
-			if (result != null)
+			if (result)
 			{
 				this.Hide();
 				_serviceProvider.GetRequiredService<MainForm>().Show();

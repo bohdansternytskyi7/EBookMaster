@@ -2,4 +2,5 @@ bin/
 obj/
 packages/
 .vs/
+EBookMaster/logs.txt
 *.csproj.user

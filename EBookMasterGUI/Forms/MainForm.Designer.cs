@@ -37,17 +37,19 @@
 			this.BookListGridView.AllowUserToAddRows = false;
 			this.BookListGridView.AllowUserToDeleteRows = false;
 			this.BookListGridView.AllowUserToOrderColumns = true;
-			this.BookListGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+			this.BookListGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.BookListGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 			this.BookListGridView.ColumnHeadersHeight = 29;
-			this.BookListGridView.Location = new System.Drawing.Point(12, -59);
+			this.BookListGridView.Location = new System.Drawing.Point(12, 19);
+			this.BookListGridView.Margin = new System.Windows.Forms.Padding(10);
 			this.BookListGridView.MultiSelect = false;
 			this.BookListGridView.Name = "BookListGridView";
 			this.BookListGridView.ReadOnly = true;
 			this.BookListGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
 			this.BookListGridView.RowTemplate.Height = 24;
-			this.BookListGridView.Size = new System.Drawing.Size(1642, 1000);
+			this.BookListGridView.Size = new System.Drawing.Size(1635, 487);
 			this.BookListGridView.TabIndex = 0;
 			// 
 			// MainForm
@@ -57,7 +59,7 @@
 			this.ClientSize = new System.Drawing.Size(1666, 953);
 			this.Controls.Add(this.BookListGridView);
 			this.Name = "MainForm";
-			this.Text = "List of Books";
+			this.Text = "List of e-books";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			((System.ComponentModel.ISupportInitialize)(this.BookListGridView)).EndInit();
 			this.ResumeLayout(false);

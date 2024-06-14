@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
 using EBookMaster.Models;
+using EBookMasterClassLibrary.DTOs;
+using EBookMasterClassLibrary.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace EBookMaster.Controllers
 {
@@ -29,6 +33,36 @@ namespace EBookMaster.Controllers
 				.Include(x => x.Categories)
 				.ToListAsync();
 			return Ok(bookBorrowings);
+		}
+
+		[HttpPost("borrow")]
+		public async Task<IActionResult> BorrowBookAsync([FromQuery] BorrowRequestDTO borrowRequestDTO)
+		{
+			var books = await _context.Books
+				.Include(x => x.Authors)
+				.ToListAsync();
+
+			var book = books
+				.Where(x => x.Title == borrowRequestDTO.Title && string.Join(", ", x.Authors.Select(y => y.Name)) == borrowRequestDTO.Authors)
+				.FirstOrDefault();
+
+			if (book == null)
+			{
+				return NotFound();
+			}
+
+			var userEmail = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			var user = await _context.Users
+				.Include(x => x.Subscription)
+				.Where(x => x.Email == userEmail)
+				.FirstOrDefaultAsync();
+
+			if (user!.Subscription.Type != SubscriptionType.Premium)
+			{
+				throw new ValidationException("Brak subskrypcji \"Premium\".");
+			}
+
+			return Ok(book);
 		}
 	}
 }

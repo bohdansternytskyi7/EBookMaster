@@ -11,6 +11,7 @@ using EBookMasterClassLibrary.Enums;
 using EBookMaster.Models;
 using EBookMasterClassLibrary.DTOs;
 using EBookMasterClassLibrary.Models;
+using System.Security.Claims;
 
 namespace MedicalFacility.Controllers
 {
@@ -72,7 +73,7 @@ namespace MedicalFacility.Controllers
 
             return Ok(new
             {
-                accessToken = new JwtSecurityTokenHandler().WriteToken(GenerateAccessToken()),
+                accessToken = new JwtSecurityTokenHandler().WriteToken(GenerateAccessToken(user)),
                 refreshToken
             });
         }
@@ -89,7 +90,7 @@ namespace MedicalFacility.Controllers
             if (user.RefreshTokenExpiration.Value < DateTime.Now)
                 return Unauthorized("Refresh token expired.");  
 
-            var newAccessToken = GenerateAccessToken();
+            var newAccessToken = GenerateAccessToken(user);
             var newRefreshToken = GenerateSalt();
             user.RefreshToken = newRefreshToken;
             await _context.SaveChangesAsync();
@@ -121,12 +122,13 @@ namespace MedicalFacility.Controllers
                 numBytesRequested: 32));
         }
 
-        private JwtSecurityToken GenerateAccessToken()
+        private JwtSecurityToken GenerateAccessToken(User user)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecretKey"]));
             return new JwtSecurityToken(
                 issuer: _configuration.GetSection("JwtSettings:ValidIssuer").Value,
                 audience: _configuration.GetSection("JwtSettings:ValidAudience").Value,
+                claims: [ new Claim(ClaimTypes.NameIdentifier, user.Email) ],
                 expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
             );

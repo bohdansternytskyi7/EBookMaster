@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using EBookMasterGUI.DTOs;
+using System.Windows.Forms;
 
 namespace EBookMasterGUI.Forms
 {
@@ -19,13 +20,29 @@ namespace EBookMasterGUI.Forms
 			BookListGridView.CellDoubleClick += BookListGridView_CellDoubleClick;
 		}
 
-		private void BookListGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		private async void BookListGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
 			if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
 			{
 				var selectedRow = BookListGridView.Rows[e.RowIndex];
-				string column1Value = selectedRow.Cells["Title"].Value.ToString();
-				string column2Value = selectedRow.Cells["Authors"].Value.ToString();
+				string title = selectedRow.Cells[nameof(BookDTO.Title)].Value.ToString();
+				string authors = selectedRow.Cells[nameof(BookDTO.Authors)].Value.ToString();
+				var result = MessageBox.Show($"Do you want to borrow a book '{title}' by {authors}?",
+									"Confirm",
+									MessageBoxButtons.YesNo,
+									MessageBoxIcon.Question);
+
+				if (result == DialogResult.Yes)
+				{
+					if (await _apiService.BorrowBookAsync(title, authors))
+					{
+						MessageBox.Show("Book borrowed successfully.", null, MessageBoxButtons.OK);
+					}
+					else
+					{
+						MessageBox.Show("There was a problem borrowing a book. Check your subscription.", null, MessageBoxButtons.OK);
+					}
+				}
 			}
 		}
 	}
