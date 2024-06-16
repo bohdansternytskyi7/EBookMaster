@@ -65,6 +65,7 @@
 			this.BorrowBtn.TabIndex = 1;
 			this.BorrowBtn.Text = "Wypożycz";
 			this.BorrowBtn.UseVisualStyleBackColor = false;
+			this.BorrowBtn.Click += new System.EventHandler(this.BorrowBtn_Click);
 			// 
 			// ReturnBtn
 			// 
@@ -76,6 +77,7 @@
 			this.ReturnBtn.TabIndex = 2;
 			this.ReturnBtn.Text = "Zwróć";
 			this.ReturnBtn.UseVisualStyleBackColor = false;
+			this.ReturnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
 			// 
 			// MainForm
 			// 

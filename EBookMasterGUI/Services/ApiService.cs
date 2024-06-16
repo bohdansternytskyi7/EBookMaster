@@ -78,4 +78,23 @@ public class ApiService
 			MessageBox.Show($"Error: {response.StatusCode}\n{errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 	}
+
+	public async void ReturnBookAsync(string title, string authors)
+	{
+		var response = await _httpClient.PostAsync($"api/bookborrowing/return?title={title}&authors={authors}", null);
+		if (response.IsSuccessStatusCode)
+		{
+			MessageBox.Show("Book returned successfully.", "Success", MessageBoxButtons.OK);
+		}
+		else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+		{
+			var errorMessage = await response.Content.ReadAsStringAsync();
+			MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+		else
+		{
+			var errorMessage = await response.Content.ReadAsStringAsync();
+			MessageBox.Show($"Error: {response.StatusCode}\n{errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+	}
 }
