@@ -29,6 +29,8 @@
 		private void InitializeComponent()
 		{
 			this.BookListGridView = new System.Windows.Forms.DataGridView();
+			this.BorrowBtn = new System.Windows.Forms.Button();
+			this.ReturnBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.BookListGridView)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -42,7 +44,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.BookListGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 			this.BookListGridView.ColumnHeadersHeight = 29;
-			this.BookListGridView.Location = new System.Drawing.Point(12, 19);
+			this.BookListGridView.Location = new System.Drawing.Point(12, 70);
 			this.BookListGridView.Margin = new System.Windows.Forms.Padding(10);
 			this.BookListGridView.MultiSelect = false;
 			this.BookListGridView.Name = "BookListGridView";
@@ -53,11 +55,35 @@
 			this.BookListGridView.Size = new System.Drawing.Size(1635, 10);
 			this.BookListGridView.TabIndex = 0;
 			// 
+			// BorrowBtn
+			// 
+			this.BorrowBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.BorrowBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.BorrowBtn.Location = new System.Drawing.Point(23, 22);
+			this.BorrowBtn.Name = "BorrowBtn";
+			this.BorrowBtn.Size = new System.Drawing.Size(144, 35);
+			this.BorrowBtn.TabIndex = 1;
+			this.BorrowBtn.Text = "Wypożycz";
+			this.BorrowBtn.UseVisualStyleBackColor = false;
+			// 
+			// ReturnBtn
+			// 
+			this.ReturnBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+			this.ReturnBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.ReturnBtn.Location = new System.Drawing.Point(187, 22);
+			this.ReturnBtn.Name = "ReturnBtn";
+			this.ReturnBtn.Size = new System.Drawing.Size(144, 35);
+			this.ReturnBtn.TabIndex = 2;
+			this.ReturnBtn.Text = "Zwróć";
+			this.ReturnBtn.UseVisualStyleBackColor = false;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1666, 953);
+			this.Controls.Add(this.ReturnBtn);
+			this.Controls.Add(this.BorrowBtn);
 			this.Controls.Add(this.BookListGridView);
 			this.Name = "MainForm";
 			this.Text = "List of e-books";
@@ -69,5 +95,7 @@
 		#endregion
 
 		private System.Windows.Forms.DataGridView BookListGridView;
+		private System.Windows.Forms.Button BorrowBtn;
+		private System.Windows.Forms.Button ReturnBtn;
 	}
 }
