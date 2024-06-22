@@ -31,6 +31,7 @@ namespace EBookMaster.Controllers
 				.Include(x => x.Series)
 				.Include(x => x.Authors)
 				.Include(x => x.Categories)
+				.Include(x => x.BookBorrowings)
 				.ToListAsync();
 			return Ok(bookBorrowings);
 		}

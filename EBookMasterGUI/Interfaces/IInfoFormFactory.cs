@@ -1,10 +1,10 @@
-﻿using EBookMasterClassLibrary.DTOs;
+﻿using EBookMasterGUI.DTOs;
 using EBookMasterGUI.Forms;
 
 namespace EBookMasterGUI.Interfaces
 {
 	public interface IInfoFormFactory
 	{
-		InfoForm Create(BorrowRequestDTO borrowRequest);
+		InfoForm Create(BookDTO bookDto);
 	}
 }

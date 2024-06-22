@@ -1,8 +1,8 @@
-﻿using EBookMasterClassLibrary.DTOs;
-using EBookMasterGUI.Forms;
+﻿using EBookMasterGUI.Forms;
 using EBookMasterGUI.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using EBookMasterGUI.DTOs;
 
 namespace EBookMasterGUI.Factories
 {
@@ -15,9 +15,9 @@ namespace EBookMasterGUI.Factories
 			_serviceProvider = serviceProvider;
 		}
 
-		public InfoForm Create(BorrowRequestDTO borrowRequest)
+		public InfoForm Create(BookDTO bookDto)
 		{
-			return ActivatorUtilities.CreateInstance<InfoForm>(_serviceProvider, borrowRequest);
+			return ActivatorUtilities.CreateInstance<InfoForm>(_serviceProvider, bookDto);
 		}
 	}
 }

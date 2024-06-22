@@ -53,6 +53,11 @@ public class ApiService
 				PublicationYear = x.PublicationYear.Year,
 				Series = x.Series?.Name ?? "",
 				Categories = string.Join(", ", x.Categories.Select(y => y.Name)),
+				BookBorrowings = x.BookBorrowings.Select(y => new BookBorrowingDTO()
+				{
+					BorrowingDate = y.BorrowingDate,
+					ReturnDate = y.ReturnDate
+				}).ToList()
 			}).ToList();
 		}
 		return null;

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using EBookMasterClassLibrary.DTOs;
+using EBookMasterGUI.DTOs;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EBookMasterGUI.Forms
@@ -10,25 +10,15 @@ namespace EBookMasterGUI.Forms
 		private readonly ApiService _apiService;
 		private readonly IServiceProvider _serviceProvider;
 
-		public string BookTitle { get; set; }
-		public string BookAuthors { get; set; }
-
-		public InfoForm(BorrowRequestDTO borrowRequestDto, ApiService apiService, IServiceProvider serviceProvider)
+		public InfoForm(BookDTO bookDto, ApiService apiService, IServiceProvider serviceProvider)
 		{
 			_apiService = apiService;
 			_serviceProvider = serviceProvider;
 			InitializeComponent();
-			this.BookTitle = borrowRequestDto.Title;
-			this.BookAuthors = borrowRequestDto.Authors;
-			this.TitleText.Text = $"Borrow history of the book '{this.BookTitle}' by '{this.BookAuthors}'";
-			LoadBorrowHistoryAsync();
-			this.BookBorrowingGridView.Focus();
-		}
-
-		private async void LoadBorrowHistoryAsync()
-		{
-			BookBorrowingGridView.DataSource = await _apiService.GetBookBorrowHistoryAsync(this.BookTitle, this.BookAuthors);
+			this.TitleText.Text = $"Borrow history of the book '{bookDto.Title}' by '{bookDto.Authors}'";
+			BookBorrowingGridView.DataSource = bookDto.BookBorrowings;
 			AdjustDataGridViewHeight();
+			this.BookBorrowingGridView.Focus();
 		}
 
 		private void AdjustDataGridViewHeight()

@@ -1,4 +1,6 @@
-﻿namespace EBookMasterGUI.DTOs
+﻿using System.Collections.Generic;
+
+namespace EBookMasterGUI.DTOs
 {
 	public class BookDTO
 	{
@@ -8,5 +10,6 @@
 		public int PublicationYear { get; set; }
 		public string Series { get; set; }
 		public string Categories { get; set; }
+		public List<BookBorrowingDTO> BookBorrowings { get; set; }
 	}
 }

@@ -71,7 +71,7 @@ namespace EBookMasterGUI.Forms
 		private void InfoBtn_Click(object sender, EventArgs e)
 		{
 			this.Hide();
-			var book = GetSelectedBook();
+			var book = (BookDTO)BookListGridView.SelectedRows[0].DataBoundItem;
 			if (book != null)
 			{
 				_infoFormFactory.Create(book).Show();
