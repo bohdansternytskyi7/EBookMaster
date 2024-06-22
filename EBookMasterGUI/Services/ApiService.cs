@@ -60,6 +60,22 @@ public class ApiService
 		return null;
 	}
 
+	public async Task<List<BookBorrowingDTO>> GetBookBorrowHistoryAsync(string title, string authors)
+	{
+		var response = await _httpClient.GetAsync($"api/bookborrowing/borrowhistory?title={title}&authors={authors}");
+		if (response.IsSuccessStatusCode)
+		{
+			var result = await response.Content.ReadAsStringAsync();
+			var books = JsonConvert.DeserializeObject<List<BookBorrowingDTO>>(result);
+			return books.Select(x => new BookBorrowingDTO
+			{
+				BorrowingDate = x.BorrowingDate,
+				ReturnDate = x.ReturnDate
+			}).ToList();
+		}
+		return null;
+	}
+
 	public async void BorrowBookAsync(string title, string authors)
 	{
 		var response = await _httpClient.PostAsync($"api/bookborrowing/borrow?title={title}&authors={authors}", null);
@@ -85,6 +101,25 @@ public class ApiService
 		if (response.IsSuccessStatusCode)
 		{
 			MessageBox.Show("Book returned successfully.", "Success", MessageBoxButtons.OK);
+		}
+		else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+		{
+			var errorMessage = await response.Content.ReadAsStringAsync();
+			MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+		else
+		{
+			var errorMessage = await response.Content.ReadAsStringAsync();
+			MessageBox.Show($"Error: {response.StatusCode}\n{errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+	}
+
+	public async void GetBookInfoAsync(string title, string authors)
+	{
+		var response = await _httpClient.GetAsync($"api/bookborrowing/info?title={title}&authors={authors}");
+		if (response.IsSuccessStatusCode)
+		{
+			
 		}
 		else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
 		{

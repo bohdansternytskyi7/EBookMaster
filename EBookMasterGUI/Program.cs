@@ -1,4 +1,6 @@
-﻿using EBookMasterGUI.Forms;
+﻿using EBookMasterGUI.Factories;
+using EBookMasterGUI.Forms;
+using EBookMasterGUI.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
@@ -28,6 +30,8 @@ namespace EBookMasterGUI
 			services.AddSingleton<ApiService>();
 			services.AddTransient<LoginForm>();
 			services.AddTransient<MainForm>();
+			services.AddTransient<InfoForm>();
+			services.AddSingleton<IInfoFormFactory, InfoFormFactory>();
 		}
 	}
 }

@@ -35,6 +35,22 @@ namespace EBookMaster.Controllers
 			return Ok(bookBorrowings);
 		}
 
+
+		[HttpGet("borrowhistory")]
+		public async Task<IActionResult> GetBorrowHistoryAsync([FromQuery] BorrowRequestDTO borrowRequestDto)
+		{
+			var user = await FindUserAsync();
+
+			var book = await FindBookAsync(borrowRequestDto);
+
+			var borrowHistory = await _context.BookBorrowings
+				.Include(x => x.Book)
+				.Where(x => x.BookId == book.Id && x.UserId == user.Id)
+				.ToListAsync();
+
+			return Ok(borrowHistory);
+		}
+
 		[HttpPost("borrow")]
 		public async Task<IActionResult> BorrowBookAsync([FromQuery] BorrowRequestDTO borrowRequestDTO)
 		{
@@ -75,6 +91,20 @@ namespace EBookMaster.Controllers
 			await _context.SaveChangesAsync();
 
 			return Ok(book);
+		}
+
+		[HttpGet("info")]
+		public async Task<IActionResult> GetBookInfoAsync([FromQuery] BorrowRequestDTO borrowRequestDTO)
+		{
+			var book = await FindBookAsync(borrowRequestDTO);
+			if (book == null)
+				return NotFound();
+
+			var user = await FindUserAsync();
+
+			return Ok(await _context.BookBorrowings
+				.Where(x => x.UserId == user.Id && x.BookId == book.Id)
+				.ToListAsync());
 		}
 
 		private async Task<Book?> FindBookAsync(BorrowRequestDTO borrowRequestDTO)
