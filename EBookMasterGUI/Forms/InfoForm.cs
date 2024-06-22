@@ -22,6 +22,7 @@ namespace EBookMasterGUI.Forms
 			this.BookAuthors = borrowRequestDto.Authors;
 			this.TitleText.Text = $"Borrow history of the book '{this.BookTitle}' by '{this.BookAuthors}'";
 			LoadBorrowHistoryAsync();
+			this.BookBorrowingGridView.Focus();
 		}
 
 		private async void LoadBorrowHistoryAsync()

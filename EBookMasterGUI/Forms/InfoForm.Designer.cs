@@ -37,14 +37,17 @@
 			// 
 			// TitleText
 			// 
+			this.TitleText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.TitleText.Location = new System.Drawing.Point(12, 12);
 			this.TitleText.Name = "TitleText";
+			this.TitleText.TabStop = false;
 			this.TitleText.Properties.Appearance.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.TitleText.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.TitleText.Properties.Appearance.Options.UseBackColor = true;
 			this.TitleText.Properties.Appearance.Options.UseFont = true;
 			this.TitleText.Properties.ReadOnly = true;
-			this.TitleText.Size = new System.Drawing.Size(393, 28);
+			this.TitleText.Size = new System.Drawing.Size(603, 28);
 			this.TitleText.TabIndex = 0;
 			// 
 			// BookBorrowingGridView
