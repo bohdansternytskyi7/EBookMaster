@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -79,57 +77,31 @@ public class ApiService
 	public async void BorrowBookAsync(string title, string authors)
 	{
 		var response = await _httpClient.PostAsync($"api/bookborrowing/borrow?title={title}&authors={authors}", null);
-		if (response.IsSuccessStatusCode)
-		{
-			MessageBox.Show("Book borrowed successfully.", "Success", MessageBoxButtons.OK);
-		}
-		else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-		{
-			var errorMessage = await response.Content.ReadAsStringAsync();
-			MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-		}
-		else
-		{
-			var errorMessage = await response.Content.ReadAsStringAsync();
-			MessageBox.Show($"Error: {response.StatusCode}\n{errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-		}
+		HandleBookResponse(response);
+
 	}
 
 	public async void ReturnBookAsync(string title, string authors)
 	{
 		var response = await _httpClient.PostAsync($"api/bookborrowing/return?title={title}&authors={authors}", null);
-		if (response.IsSuccessStatusCode)
-		{
-			MessageBox.Show("Book returned successfully.", "Success", MessageBoxButtons.OK);
-		}
-		else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-		{
-			var errorMessage = await response.Content.ReadAsStringAsync();
-			MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-		}
-		else
-		{
-			var errorMessage = await response.Content.ReadAsStringAsync();
-			MessageBox.Show($"Error: {response.StatusCode}\n{errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-		}
+		HandleBookResponse(response, false);
 	}
 
-	public async void GetBookInfoAsync(string title, string authors)
+	private async void HandleBookResponse(HttpResponseMessage httpResponseMessage, bool borrow = true)
 	{
-		var response = await _httpClient.GetAsync($"api/bookborrowing/info?title={title}&authors={authors}");
-		if (response.IsSuccessStatusCode)
+		if (httpResponseMessage.IsSuccessStatusCode)
 		{
-			
+			MessageBox.Show($"Book {(borrow ? "borrowed" : "returned")} successfully.", "Success", MessageBoxButtons.OK);
 		}
-		else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+		else if (httpResponseMessage.StatusCode == System.Net.HttpStatusCode.BadRequest)
 		{
-			var errorMessage = await response.Content.ReadAsStringAsync();
+			var errorMessage = await httpResponseMessage.Content.ReadAsStringAsync();
 			MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 		else
 		{
-			var errorMessage = await response.Content.ReadAsStringAsync();
-			MessageBox.Show($"Error: {response.StatusCode}\n{errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			var errorMessage = await httpResponseMessage.Content.ReadAsStringAsync();
+			MessageBox.Show($"Error: {httpResponseMessage.StatusCode}\n{errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using EBookMasterGUI.DTOs;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows.Forms;
 using EBookMasterClassLibrary.DTOs;
@@ -41,59 +40,59 @@ namespace EBookMasterGUI.Forms
 
 		private void BorrowBtn_Click(object sender, System.EventArgs e)
 		{
-			try
+
+			var book = GetSelectedBook();
+			if (book != null)
 			{
-				var selectedRow = BookListGridView.SelectedRows[0];
-				var title = selectedRow.Cells[nameof(BookDTO.Title)].Value.ToString();
-				var authors = selectedRow.Cells[nameof(BookDTO.Authors)].Value.ToString();
-				var result = MessageBox.Show($"Do you want to borrow a book '{title}' by {authors}?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				var result = MessageBox.Show($"Do you want to borrow a book '{book.Title}' by {book.Authors}?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 				if (result == DialogResult.Yes)
 				{
-					_apiService.BorrowBookAsync(title, authors);
+					_apiService.BorrowBookAsync(book.Title, book.Authors);
 				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK);
 			}
 		}
 
 		private void ReturnBtn_Click(object sender, System.EventArgs e)
 		{
-			try
+			var book = GetSelectedBook();
+			if (book != null)
 			{
-				var selectedRow = BookListGridView.SelectedRows[0];
-				var title = selectedRow.Cells[nameof(BookDTO.Title)].Value.ToString();
-				var authors = selectedRow.Cells[nameof(BookDTO.Authors)].Value.ToString();
-				var result = MessageBox.Show($"Do you want to return a book '{title}' by {authors}?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				var result = MessageBox.Show($"Do you want to return a book '{book.Title}' by {book.Authors}?", "",
+					MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 				if (result == DialogResult.Yes)
 				{
-					_apiService.ReturnBookAsync(title, authors);
+					_apiService.ReturnBookAsync(book.Title, book.Authors);
 				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK);
 			}
 		}
 
 		private void InfoBtn_Click(object sender, EventArgs e)
+		{
+			this.Hide();
+			var book = GetSelectedBook();
+			if (book != null)
+			{
+				_infoFormFactory.Create(book).Show();
+			}
+		}
+
+		private BorrowRequestDTO GetSelectedBook()
 		{
 			try
 			{
 				var selectedRow = BookListGridView.SelectedRows[0];
 				var title = selectedRow.Cells[nameof(BookDTO.Title)].Value.ToString();
 				var authors = selectedRow.Cells[nameof(BookDTO.Authors)].Value.ToString();
-				this.Hide();
-				_infoFormFactory.Create(new BorrowRequestDTO() { Title = title, Authors = authors }).Show();
-
+				return new BorrowRequestDTO() { Title = title, Authors = authors };
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK);
 			}
+
+			return null;
 		}
 	}
 }
