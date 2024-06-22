@@ -39,8 +39,7 @@
 			this.BookListGridView.AllowUserToAddRows = false;
 			this.BookListGridView.AllowUserToDeleteRows = false;
 			this.BookListGridView.AllowUserToOrderColumns = true;
-			this.BookListGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+			this.BookListGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.BookListGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 			this.BookListGridView.ColumnHeadersHeight = 29;
@@ -51,8 +50,8 @@
 			this.BookListGridView.ReadOnly = true;
 			this.BookListGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
 			this.BookListGridView.RowTemplate.Height = 24;
-			this.BookListGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-			this.BookListGridView.Size = new System.Drawing.Size(1635, 10);
+			this.BookListGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.BookListGridView.Size = new System.Drawing.Size(1635, 186);
 			this.BookListGridView.TabIndex = 0;
 			// 
 			// BorrowBtn
@@ -95,9 +94,8 @@
 
 		}
 		#endregion
-
-		private System.Windows.Forms.DataGridView BookListGridView;
 		private System.Windows.Forms.Button BorrowBtn;
 		private System.Windows.Forms.Button ReturnBtn;
+		public System.Windows.Forms.DataGridView BookListGridView;
 	}
 }

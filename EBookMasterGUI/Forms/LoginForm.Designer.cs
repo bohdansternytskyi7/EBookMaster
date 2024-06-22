@@ -59,27 +59,28 @@
 			// 
 			// txtEmail
 			// 
-			this.txtEmail.Location = new System.Drawing.Point(238, 148);
-			this.txtEmail.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.txtEmail.Location = new System.Drawing.Point(238, 145);
+			this.txtEmail.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.txtEmail.Name = "txtEmail";
-			this.txtEmail.Size = new System.Drawing.Size(195, 22);
+			this.txtEmail.Size = new System.Drawing.Size(288, 22);
 			this.txtEmail.TabIndex = 3;
 			// 
 			// txtPassword
 			// 
-			this.txtPassword.Location = new System.Drawing.Point(238, 184);
-			this.txtPassword.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.txtPassword.Properties.PasswordChar = '*';
+			this.txtPassword.Location = new System.Drawing.Point(238, 182);
+			this.txtPassword.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.txtPassword.Name = "txtPassword";
-			this.txtPassword.Size = new System.Drawing.Size(195, 22);
+			this.txtPassword.Size = new System.Drawing.Size(288, 22);
 			this.txtPassword.TabIndex = 4;
 			// 
 			// btnLogin
 			// 
 			this.btnLogin.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.btnLogin.Location = new System.Drawing.Point(238, 251);
+			this.btnLogin.Location = new System.Drawing.Point(238, 241);
 			this.btnLogin.Name = "btnLogin";
-			this.btnLogin.Size = new System.Drawing.Size(156, 41);
+			this.btnLogin.Size = new System.Drawing.Size(288, 37);
 			this.btnLogin.TabIndex = 6;
 			this.btnLogin.Text = "Login";
 			this.btnLogin.UseVisualStyleBackColor = false;
@@ -89,7 +90,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(563, 417);
+			this.ClientSize = new System.Drawing.Size(697, 417);
 			this.Controls.Add(this.btnLogin);
 			this.Controls.Add(this.txtPassword);
 			this.Controls.Add(this.txtEmail);
