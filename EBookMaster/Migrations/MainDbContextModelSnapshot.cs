@@ -61,6 +61,36 @@ namespace EBookMaster.Migrations
                         {
                             AuthorsId = 3,
                             BooksId = 5
+                        },
+                        new
+                        {
+                            AuthorsId = 8,
+                            BooksId = 8
+                        },
+                        new
+                        {
+                            AuthorsId = 7,
+                            BooksId = 8
+                        },
+                        new
+                        {
+                            AuthorsId = 5,
+                            BooksId = 7
+                        },
+                        new
+                        {
+                            AuthorsId = 6,
+                            BooksId = 6
+                        },
+                        new
+                        {
+                            AuthorsId = 1,
+                            BooksId = 3
+                        },
+                        new
+                        {
+                            AuthorsId = 6,
+                            BooksId = 7
                         });
                 });
 
@@ -98,6 +128,26 @@ namespace EBookMaster.Migrations
                         {
                             BooksId = 4,
                             CategoriesId = 1
+                        },
+                        new
+                        {
+                            BooksId = 8,
+                            CategoriesId = 8
+                        },
+                        new
+                        {
+                            BooksId = 7,
+                            CategoriesId = 8
+                        },
+                        new
+                        {
+                            BooksId = 6,
+                            CategoriesId = 7
+                        },
+                        new
+                        {
+                            BooksId = 6,
+                            CategoriesId = 6
                         },
                         new
                         {
@@ -488,19 +538,23 @@ namespace EBookMaster.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("SendDate")
+                    b.Property<DateTime?>("SendDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Notifications");
                 });
@@ -581,6 +635,8 @@ namespace EBookMaster.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Recommendations");
                 });
 
@@ -593,9 +649,9 @@ namespace EBookMaster.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("AverageRate")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
-                    b.Property<int?>("BookId")
+                    b.Property<int>("BookId")
                         .HasColumnType("int");
 
                     b.Property<int>("BorrowCount")
@@ -938,11 +994,35 @@ namespace EBookMaster.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Notification", b =>
+                {
+                    b.HasOne("EBookMasterClassLibrary.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Recommendation", b =>
+                {
+                    b.HasOne("EBookMasterClassLibrary.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EBookMasterClassLibrary.Models.Report", b =>
                 {
                     b.HasOne("EBookMasterClassLibrary.Models.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("BookId");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Book");
                 });

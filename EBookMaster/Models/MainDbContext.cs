@@ -101,7 +101,13 @@ namespace EBookMaster.Models
 						new { AuthorsId = 1, BooksId = 2 },
 						new { AuthorsId = 2, BooksId = 3 },
 						new { AuthorsId = 2, BooksId = 4 },
-						new { AuthorsId = 3, BooksId = 5 }
+						new { AuthorsId = 3, BooksId = 5 },
+						new { AuthorsId = 8, BooksId = 8 },
+						new { AuthorsId = 7, BooksId = 8 },
+						new { AuthorsId = 5, BooksId = 7 },
+						new { AuthorsId = 6, BooksId = 6 },
+						new { AuthorsId = 1, BooksId = 3 },
+						new { AuthorsId = 6, BooksId = 7 }
 					));
 
 				e.HasMany(b => b.Categories)
@@ -111,6 +117,10 @@ namespace EBookMaster.Models
 						new { BooksId = 2, CategoriesId = 1 },
 						new { BooksId = 3, CategoriesId = 1 },
 						new { BooksId = 4, CategoriesId = 1 },
+						new { BooksId = 8, CategoriesId = 8 },
+						new { BooksId = 7, CategoriesId = 8 },
+						new { BooksId = 6, CategoriesId = 7 },
+						new { BooksId = 6, CategoriesId = 6 },
 						new { BooksId = 5, CategoriesId = 2 }
 					));
 
@@ -125,6 +135,12 @@ namespace EBookMaster.Models
 					new { Id = index++, Title = "Catching Fire", PublishingHouseId = 2, PublicationYear = new DateTime(2009, 9, 1), SeriesId = 6 },
 					new { Id = index++, Title = "Mockingjay", PublishingHouseId = 2, PublicationYear = new DateTime(2010, 8, 24), SeriesId = 6 }
 				);
+			});
+
+			modelBuilder.Entity<Report>(e =>
+			{
+				e.Property(s => s.AverageRate)
+					.HasColumnType("decimal(18, 2)");
 			});
 
 			modelBuilder.Entity<Subscription>(e =>

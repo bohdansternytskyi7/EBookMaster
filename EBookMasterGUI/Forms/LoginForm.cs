@@ -15,6 +15,7 @@ namespace EBookMasterGUI
 			InitializeComponent();
 			_apiService = apiService;
 			_serviceProvider = serviceProvider;
+			this.StartPosition = FormStartPosition.CenterScreen;
 		}
 
 		private async void btnLogin_Click(object sender, EventArgs e)

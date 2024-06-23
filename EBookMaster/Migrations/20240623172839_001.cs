@@ -44,22 +44,6 @@ namespace EBookMaster.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Notifications",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SendDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Notifications", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PublishingHouses",
                 columns: table => new
                 {
@@ -72,19 +56,6 @@ namespace EBookMaster.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PublishingHouses", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Recommendations",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Recommendations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -113,6 +84,75 @@ namespace EBookMaster.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Subscriptions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Salt = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    RefreshToken = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    RefreshTokenExpiration = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LibraryCardNumber = table.Column<int>(type: "int", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    SubscriptionId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Subscriptions_SubscriptionId",
+                        column: x => x.SubscriptionId,
+                        principalTable: "Subscriptions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    SendDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notifications_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Recommendations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Recommendations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Recommendations_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -149,34 +189,6 @@ namespace EBookMaster.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Salt = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    RefreshToken = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    RefreshTokenExpiration = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LibraryCardNumber = table.Column<int>(type: "int", nullable: false),
-                    Role = table.Column<int>(type: "int", nullable: false),
-                    SubscriptionId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Subscriptions_SubscriptionId",
-                        column: x => x.SubscriptionId,
-                        principalTable: "Subscriptions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AuthorBook",
                 columns: table => new
                 {
@@ -196,6 +208,34 @@ namespace EBookMaster.Migrations
                         name: "FK_AuthorBook_Books_BooksId",
                         column: x => x.BooksId,
                         principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookBorrowings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BorrowingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookBorrowings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BookBorrowings_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookBorrowings_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -231,7 +271,7 @@ namespace EBookMaster.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BookId = table.Column<int>(type: "int", nullable: true),
+                    BookId = table.Column<int>(type: "int", nullable: false),
                     BorrowCount = table.Column<int>(type: "int", nullable: false),
                     AverageRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -242,33 +282,6 @@ namespace EBookMaster.Migrations
                         name: "FK_Reports_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BookBorrowings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BorrowingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    BookId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookBorrowings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BookBorrowings_Books_BookId",
-                        column: x => x.BookId,
-                        principalTable: "Books",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookBorrowings_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -395,9 +408,15 @@ namespace EBookMaster.Migrations
                 {
                     { 1, 1 },
                     { 1, 2 },
+                    { 1, 3 },
                     { 2, 3 },
                     { 2, 4 },
-                    { 3, 5 }
+                    { 3, 5 },
+                    { 5, 7 },
+                    { 6, 6 },
+                    { 6, 7 },
+                    { 7, 8 },
+                    { 8, 8 }
                 });
 
             migrationBuilder.InsertData(
@@ -423,7 +442,11 @@ namespace EBookMaster.Migrations
                     { 2, 1 },
                     { 3, 1 },
                     { 4, 1 },
-                    { 5, 2 }
+                    { 5, 2 },
+                    { 6, 6 },
+                    { 6, 7 },
+                    { 7, 8 },
+                    { 8, 8 }
                 });
 
             migrationBuilder.InsertData(
@@ -474,6 +497,16 @@ namespace EBookMaster.Migrations
                 column: "SeriesId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Notifications_UserId",
+                table: "Notifications",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Recommendations_UserId",
+                table: "Recommendations",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reports_BookId",
                 table: "Reports",
                 column: "BookId");
@@ -520,9 +553,6 @@ namespace EBookMaster.Migrations
                 name: "Books");
 
             migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "PublishingHouses");
 
             migrationBuilder.DropTable(
@@ -530,6 +560,9 @@ namespace EBookMaster.Migrations
 
             migrationBuilder.DropTable(
                 name: "Series");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Subscriptions");
