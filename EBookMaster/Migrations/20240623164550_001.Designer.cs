@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EBookMaster.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20240623163618_001")]
+    [Migration("20240623164550_001")]
     partial class _001
     {
         /// <inheritdoc />
@@ -595,8 +595,8 @@ namespace EBookMaster.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AverageRate")
-                        .HasColumnType("int");
+                    b.Property<decimal>("AverageRate")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("BookId")
                         .HasColumnType("int");

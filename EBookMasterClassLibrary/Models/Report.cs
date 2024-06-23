@@ -7,6 +7,6 @@ namespace EBookMasterClassLibrary.Models
 		public DateTime Date { get; set; }
 		public Book Book { get; set; }
 		public int BorrowCount { get; set; }
-		public int AverageRate { get; set; }
+		public decimal AverageRate { get; set; }
 	}
 }

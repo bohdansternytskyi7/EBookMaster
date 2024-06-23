@@ -233,7 +233,7 @@ namespace EBookMaster.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: true),
                     BorrowCount = table.Column<int>(type: "int", nullable: false),
-                    AverageRate = table.Column<int>(type: "int", nullable: false)
+                    AverageRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {

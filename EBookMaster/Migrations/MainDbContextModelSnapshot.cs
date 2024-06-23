@@ -592,8 +592,8 @@ namespace EBookMaster.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AverageRate")
-                        .HasColumnType("int");
+                    b.Property<decimal>("AverageRate")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("BookId")
                         .HasColumnType("int");
