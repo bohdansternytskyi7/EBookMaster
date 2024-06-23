@@ -36,11 +36,27 @@ namespace EBookMaster.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SendDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,6 +72,19 @@ namespace EBookMaster.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PublishingHouses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Recommendations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Recommendations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,7 +124,8 @@ namespace EBookMaster.Migrations
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     PublishingHouseId = table.Column<int>(type: "int", nullable: false),
                     PublicationYear = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SeriesId = table.Column<int>(type: "int", nullable: true)
+                    SeriesId = table.Column<int>(type: "int", nullable: true),
+                    RecommendationId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -106,6 +136,11 @@ namespace EBookMaster.Migrations
                         principalTable: "PublishingHouses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Books_Recommendations_RecommendationId",
+                        column: x => x.RecommendationId,
+                        principalTable: "Recommendations",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Books_Series_SeriesId",
                         column: x => x.SeriesId,
@@ -190,6 +225,27 @@ namespace EBookMaster.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Reports",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BookId = table.Column<int>(type: "int", nullable: true),
+                    BorrowCount = table.Column<int>(type: "int", nullable: false),
+                    AverageRate = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reports", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reports_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BookBorrowings",
                 columns: table => new
                 {
@@ -264,7 +320,10 @@ namespace EBookMaster.Migrations
                     { 2, "Literature based on facts, real events, and real people.", "Non-Fiction" },
                     { 3, "Literature dealing with futuristic settings and advanced technologies.", "Science Fiction" },
                     { 4, "Literature featuring magical and supernatural elements.", "Fantasy" },
-                    { 5, "Literature detailing the life of a real person.", "Biography" }
+                    { 5, "Literature detailing the life of a real person.", "Biography" },
+                    { 6, "Literature based on historical events and figures.", "History" },
+                    { 7, "Literature dealing with the solution of a crime or unraveling of secrets.", "Mystery" },
+                    { 8, "Literature designed to hold the interest by the use of a high degree of intrigue, adventure, or suspense.", "Thriller" }
                 });
 
             migrationBuilder.InsertData(
@@ -288,7 +347,10 @@ namespace EBookMaster.Migrations
                     { 2, "Harry Potter" },
                     { 3, "A Song of Ice and Fire" },
                     { 4, "The Chronicles of Narnia" },
-                    { 5, "Sherlock Holmes" }
+                    { 5, "Sherlock Holmes" },
+                    { 6, "The Hunger Games" },
+                    { 7, "Percy Jackson & the Olympians" },
+                    { 8, "Divergent" }
                 });
 
             migrationBuilder.InsertData(
@@ -304,14 +366,17 @@ namespace EBookMaster.Migrations
 
             migrationBuilder.InsertData(
                 table: "Books",
-                columns: new[] { "Id", "PublicationYear", "PublishingHouseId", "SeriesId", "Title" },
+                columns: new[] { "Id", "PublicationYear", "PublishingHouseId", "RecommendationId", "SeriesId", "Title" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1954, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, "The Fellowship of the Ring" },
-                    { 2, new DateTime(1954, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, "The Two Towers" },
-                    { 3, new DateTime(1997, 6, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, "Harry Potter and the Philosopher's Stone" },
-                    { 4, new DateTime(1998, 7, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, "Harry Potter and the Chamber of Secrets" },
-                    { 5, new DateTime(1988, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, "A Brief History of Time" }
+                    { 1, new DateTime(1954, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, "The Fellowship of the Ring" },
+                    { 2, new DateTime(1954, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, "The Two Towers" },
+                    { 3, new DateTime(1997, 6, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, 2, "Harry Potter and the Philosopher's Stone" },
+                    { 4, new DateTime(1998, 7, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, 2, "Harry Potter and the Chamber of Secrets" },
+                    { 5, new DateTime(1988, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, "A Brief History of Time" },
+                    { 6, new DateTime(2008, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, 6, "The Hunger Games" },
+                    { 7, new DateTime(2009, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, 6, "Catching Fire" },
+                    { 8, new DateTime(2010, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, 6, "Mockingjay" }
                 });
 
             migrationBuilder.InsertData(
@@ -340,11 +405,13 @@ namespace EBookMaster.Migrations
                 columns: new[] { "Id", "BookId", "BorrowingDate", "ReturnDate", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 2, new DateTime(2023, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, 3, new DateTime(2023, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 3, 4, new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 4, 2, new DateTime(2023, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 5, 1, new DateTime(2023, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 }
+                    { 1, 2, new DateTime(2023, 5, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, 3, new DateTime(2023, 6, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 3, 4, new DateTime(2023, 6, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 7, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 4, 2, new DateTime(2023, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 8, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 5, 1, new DateTime(2023, 5, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 6, 5, new DateTime(2023, 7, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 8, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 7, 6, new DateTime(2023, 8, 1, 16, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 16, 0, 0, 0, DateTimeKind.Unspecified), 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -366,7 +433,9 @@ namespace EBookMaster.Migrations
                 {
                     { 1, 1, "Great book, highly recommended!", 4 },
                     { 2, 2, "Interesting read, but could be improved.", 3 },
-                    { 3, 3, "Absolutely loved it, couldn't put it down!", 5 }
+                    { 3, 3, "Absolutely loved it, couldn't put it down!", 5 },
+                    { 4, 4, "Not as good as I expected.", 2 },
+                    { 5, 5, "An excellent read!", 5 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -395,9 +464,19 @@ namespace EBookMaster.Migrations
                 column: "PublishingHouseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Books_RecommendationId",
+                table: "Books",
+                column: "RecommendationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Books_SeriesId",
                 table: "Books",
                 column: "SeriesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reports_BookId",
+                table: "Reports",
+                column: "BookId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_BookBorrowingId",
@@ -420,6 +499,12 @@ namespace EBookMaster.Migrations
                 name: "BookCategory");
 
             migrationBuilder.DropTable(
+                name: "Notifications");
+
+            migrationBuilder.DropTable(
+                name: "Reports");
+
+            migrationBuilder.DropTable(
                 name: "Reviews");
 
             migrationBuilder.DropTable(
@@ -439,6 +524,9 @@ namespace EBookMaster.Migrations
 
             migrationBuilder.DropTable(
                 name: "PublishingHouses");
+
+            migrationBuilder.DropTable(
+                name: "Recommendations");
 
             migrationBuilder.DropTable(
                 name: "Series");

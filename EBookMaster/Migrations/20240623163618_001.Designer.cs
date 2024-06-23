@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EBookMaster.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20240614113104_001")]
+    [Migration("20240623163618_001")]
     partial class _001
     {
         /// <inheritdoc />
@@ -236,6 +236,9 @@ namespace EBookMaster.Migrations
                     b.Property<int>("PublishingHouseId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RecommendationId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("SeriesId")
                         .HasColumnType("int");
 
@@ -247,6 +250,8 @@ namespace EBookMaster.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PublishingHouseId");
+
+                    b.HasIndex("RecommendationId");
 
                     b.HasIndex("SeriesId");
 
@@ -291,6 +296,30 @@ namespace EBookMaster.Migrations
                             PublicationYear = new DateTime(1988, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublishingHouseId = 1,
                             Title = "A Brief History of Time"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            PublicationYear = new DateTime(2008, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PublishingHouseId = 2,
+                            SeriesId = 6,
+                            Title = "The Hunger Games"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            PublicationYear = new DateTime(2009, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PublishingHouseId = 2,
+                            SeriesId = 6,
+                            Title = "Catching Fire"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            PublicationYear = new DateTime(2010, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PublishingHouseId = 2,
+                            SeriesId = 6,
+                            Title = "Mockingjay"
                         });
                 });
 
@@ -327,40 +356,56 @@ namespace EBookMaster.Migrations
                         {
                             Id = 1,
                             BookId = 2,
-                            BorrowingDate = new DateTime(2023, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2023, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2023, 5, 20, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2023, 6, 20, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
                             BookId = 3,
-                            BorrowingDate = new DateTime(2023, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2023, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2023, 6, 1, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2023, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 3,
                             BookId = 4,
-                            BorrowingDate = new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2023, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2023, 6, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2023, 7, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 4,
                             BookId = 2,
-                            BorrowingDate = new DateTime(2023, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2023, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2023, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2023, 8, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 5,
                             BookId = 1,
-                            BorrowingDate = new DateTime(2023, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2023, 5, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2023, 6, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BookId = 5,
+                            BorrowingDate = new DateTime(2023, 7, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2023, 8, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BookId = 6,
+                            BorrowingDate = new DateTime(2023, 8, 1, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2023, 9, 1, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         });
                 });
@@ -375,8 +420,8 @@ namespace EBookMaster.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -417,7 +462,50 @@ namespace EBookMaster.Migrations
                             Id = 5,
                             Description = "Literature detailing the life of a real person.",
                             Name = "Biography"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Literature based on historical events and figures.",
+                            Name = "History"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Literature dealing with the solution of a crime or unraveling of secrets.",
+                            Name = "Mystery"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "Literature designed to hold the interest by the use of a high degree of intrigue, adventure, or suspense.",
+                            Name = "Thriller"
                         });
+                });
+
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("SendDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("EBookMasterClassLibrary.Models.PublishingHouse", b =>
@@ -483,6 +571,49 @@ namespace EBookMaster.Migrations
                         });
                 });
 
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Recommendation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Recommendations");
+                });
+
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Report", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AverageRate")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BorrowCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Reports");
+                });
+
             modelBuilder.Entity("EBookMasterClassLibrary.Models.Review", b =>
                 {
                     b.Property<int>("Id")
@@ -529,6 +660,20 @@ namespace EBookMaster.Migrations
                             BookBorrowingId = 3,
                             Description = "Absolutely loved it, couldn't put it down!",
                             Rate = 5
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BookBorrowingId = 4,
+                            Description = "Not as good as I expected.",
+                            Rate = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BookBorrowingId = 5,
+                            Description = "An excellent read!",
+                            Rate = 5
                         });
                 });
 
@@ -574,6 +719,21 @@ namespace EBookMaster.Migrations
                         {
                             Id = 5,
                             Name = "Sherlock Holmes"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "The Hunger Games"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Percy Jackson & the Olympians"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Divergent"
                         });
                 });
 
@@ -749,6 +909,10 @@ namespace EBookMaster.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EBookMasterClassLibrary.Models.Recommendation", null)
+                        .WithMany("RecommendedBooks")
+                        .HasForeignKey("RecommendationId");
+
                     b.HasOne("EBookMasterClassLibrary.Models.Series", "Series")
                         .WithMany("Books")
                         .HasForeignKey("SeriesId");
@@ -761,7 +925,7 @@ namespace EBookMaster.Migrations
             modelBuilder.Entity("EBookMasterClassLibrary.Models.BookBorrowing", b =>
                 {
                     b.HasOne("EBookMasterClassLibrary.Models.Book", "Book")
-                        .WithMany()
+                        .WithMany("BookBorrowings")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -775,6 +939,15 @@ namespace EBookMaster.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Report", b =>
+                {
+                    b.HasOne("EBookMasterClassLibrary.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId");
+
+                    b.Navigation("Book");
                 });
 
             modelBuilder.Entity("EBookMasterClassLibrary.Models.Review", b =>
@@ -799,9 +972,19 @@ namespace EBookMaster.Migrations
                     b.Navigation("Subscription");
                 });
 
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Book", b =>
+                {
+                    b.Navigation("BookBorrowings");
+                });
+
             modelBuilder.Entity("EBookMasterClassLibrary.Models.PublishingHouse", b =>
                 {
                     b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("EBookMasterClassLibrary.Models.Recommendation", b =>
+                {
+                    b.Navigation("RecommendedBooks");
                 });
 
             modelBuilder.Entity("EBookMasterClassLibrary.Models.Series", b =>

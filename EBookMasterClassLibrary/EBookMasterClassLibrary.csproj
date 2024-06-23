@@ -49,6 +49,7 @@
     <Compile Include="DTOs\BorrowRequestDTO.cs" />
     <Compile Include="DTOs\LoginRequestDTO.cs" />
     <Compile Include="DTOs\RegisterRequestDTO.cs" />
+    <Compile Include="Enums\NotificationStatus.cs" />
     <Compile Include="Enums\Role.cs" />
     <Compile Include="Enums\SubscriptionPeriod.cs" />
     <Compile Include="Enums\SubscriptionType.cs" />
@@ -57,8 +58,11 @@
     <Compile Include="Models\BookBorrowing.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PublishingHouse.cs" />
+    <Compile Include="Models\Recommendation.cs" />
+    <Compile Include="Models\Report.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\Series.cs" />
     <Compile Include="Models\Subscription.cs" />

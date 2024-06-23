@@ -27,6 +27,9 @@ namespace EBookMaster.Models
 		public DbSet<Review> Reviews { get; set; }
 		public DbSet<User> Users { get; set; }
 		public DbSet<Subscription> Subscriptions { get; set; }
+		public DbSet<Report> Reports { get; set; }
+		public DbSet<Notification> Notifications { get; set; }
+		public DbSet<Recommendation> Recommendations { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -55,7 +58,10 @@ namespace EBookMaster.Models
 					new Category { Id = index++, Name = "Non-Fiction", Description = "Literature based on facts, real events, and real people." },
 					new Category { Id = index++, Name = "Science Fiction", Description = "Literature dealing with futuristic settings and advanced technologies." },
 					new Category { Id = index++, Name = "Fantasy", Description = "Literature featuring magical and supernatural elements." },
-					new Category { Id = index++, Name = "Biography", Description = "Literature detailing the life of a real person." }
+					new Category { Id = index++, Name = "Biography", Description = "Literature detailing the life of a real person." },
+					new Category { Id = index++, Name = "History", Description = "Literature based on historical events and figures." },
+					new Category { Id = index++, Name = "Mystery", Description = "Literature dealing with the solution of a crime or unraveling of secrets." },
+					new Category { Id = index++, Name = "Thriller", Description = "Literature designed to hold the interest by the use of a high degree of intrigue, adventure, or suspense." }
 				);
 			});
 
@@ -79,7 +85,10 @@ namespace EBookMaster.Models
 					new Series { Id = index++, Name = "Harry Potter" },
 					new Series { Id = index++, Name = "A Song of Ice and Fire" },
 					new Series { Id = index++, Name = "The Chronicles of Narnia" },
-					new Series { Id = index++, Name = "Sherlock Holmes" }
+					new Series { Id = index++, Name = "Sherlock Holmes" },
+					new Series { Id = index++, Name = "The Hunger Games" },
+					new Series { Id = index++, Name = "Percy Jackson & the Olympians" },
+					new Series { Id = index++, Name = "Divergent" }
 				);
 			});
 
@@ -111,7 +120,10 @@ namespace EBookMaster.Models
 					new { Id = index++, Title = "The Two Towers", PublishingHouseId = 1, PublicationYear = new DateTime(1954, 11, 11), SeriesId = 1 },
 					new { Id = index++, Title = "Harry Potter and the Philosopher's Stone", PublishingHouseId = 2, PublicationYear = new DateTime(1997, 6, 26), SeriesId = 2 },
 					new { Id = index++, Title = "Harry Potter and the Chamber of Secrets", PublishingHouseId = 2, PublicationYear = new DateTime(1998, 7, 2), SeriesId = 2 },
-					new { Id = index++, Title = "A Brief History of Time", PublishingHouseId = 1, PublicationYear = new DateTime(1988, 4, 1), SeriesId = (int?)null }
+					new { Id = index++, Title = "A Brief History of Time", PublishingHouseId = 1, PublicationYear = new DateTime(1988, 4, 1), SeriesId = (int?)null },
+					new { Id = index++, Title = "The Hunger Games", PublishingHouseId = 2, PublicationYear = new DateTime(2008, 9, 14), SeriesId = 6 },
+					new { Id = index++, Title = "Catching Fire", PublishingHouseId = 2, PublicationYear = new DateTime(2009, 9, 1), SeriesId = 6 },
+					new { Id = index++, Title = "Mockingjay", PublishingHouseId = 2, PublicationYear = new DateTime(2010, 8, 24), SeriesId = 6 }
 				);
 			});
 
@@ -164,11 +176,13 @@ namespace EBookMaster.Models
 			{
 				var index = 1;
 				e.HasData(
-					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 5, 20), ReturnDate = new DateTime(2023, 6, 20), BookId = 2, UserId = 1 },
-					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 6, 1), ReturnDate = new DateTime(2023, 7, 1), BookId = 3, UserId = 1 },
-					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 6, 10), ReturnDate = new DateTime(2023, 7, 10), BookId = 4, UserId = 1 },
-					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 7, 5), ReturnDate = new DateTime(2023, 8, 5), BookId = 2, UserId = 1 },
-					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 5, 15), ReturnDate = new DateTime(2023, 6, 15), BookId = 1, UserId = 1 }
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 5, 20, 10, 0, 0), ReturnDate = new DateTime(2023, 6, 20, 10, 0, 0), BookId = 2, UserId = 1 },
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 6, 1, 11, 0, 0), ReturnDate = new DateTime(2023, 7, 1, 11, 0, 0), BookId = 3, UserId = 1 },
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 6, 10, 12, 0, 0), ReturnDate = new DateTime(2023, 7, 10, 12, 0, 0), BookId = 4, UserId = 1 },
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 7, 5, 13, 0, 0), ReturnDate = new DateTime(2023, 8, 5, 13, 0, 0), BookId = 2, UserId = 1 },
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 5, 15, 14, 0, 0), ReturnDate = new DateTime(2023, 6, 15, 14, 0, 0), BookId = 1, UserId = 1 },
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 7, 20, 15, 0, 0), ReturnDate = new DateTime(2023, 8, 20, 15, 0, 0), BookId = 5, UserId = 1 },
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2023, 8, 1, 16, 0, 0), ReturnDate = new DateTime(2023, 9, 1, 16, 0, 0), BookId = 6, UserId = 1 }
 				);
 			});
 
@@ -178,7 +192,9 @@ namespace EBookMaster.Models
 				e.HasData(
 					new Review { Id = index++, Rate = 4, Description = "Great book, highly recommended!", BookBorrowingId = 1 },
 					new Review { Id = index++, Rate = 3, Description = "Interesting read, but could be improved.", BookBorrowingId = 2 },
-					new Review { Id = index++, Rate = 5, Description = "Absolutely loved it, couldn't put it down!", BookBorrowingId = 3 }
+					new Review { Id = index++, Rate = 5, Description = "Absolutely loved it, couldn't put it down!", BookBorrowingId = 3 },
+					new Review { Id = index++, Rate = 2, Description = "Not as good as I expected.", BookBorrowingId = 4 },
+					new Review { Id = index++, Rate = 5, Description = "An excellent read!", BookBorrowingId = 5 }
 				);
 			});
 		}
