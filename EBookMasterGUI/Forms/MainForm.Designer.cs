@@ -64,7 +64,7 @@
 			this.BorrowBtn.Name = "BorrowBtn";
 			this.BorrowBtn.Size = new System.Drawing.Size(144, 35);
 			this.BorrowBtn.TabIndex = 1;
-			this.BorrowBtn.Text = "Wypożycz";
+			this.BorrowBtn.Text = "Borrow";
 			this.BorrowBtn.UseVisualStyleBackColor = false;
 			this.BorrowBtn.Click += new System.EventHandler(this.BorrowBtn_Click);
 			// 
@@ -76,7 +76,7 @@
 			this.ReturnBtn.Name = "ReturnBtn";
 			this.ReturnBtn.Size = new System.Drawing.Size(144, 35);
 			this.ReturnBtn.TabIndex = 2;
-			this.ReturnBtn.Text = "Zwróć";
+			this.ReturnBtn.Text = "Return";
 			this.ReturnBtn.UseVisualStyleBackColor = false;
 			this.ReturnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
 			// 
@@ -88,7 +88,7 @@
 			this.InfoBtn.Name = "InfoBtn";
 			this.InfoBtn.Size = new System.Drawing.Size(144, 35);
 			this.InfoBtn.TabIndex = 3;
-			this.InfoBtn.Text = "Szczegóły";
+			this.InfoBtn.Text = "Info";
 			this.InfoBtn.UseVisualStyleBackColor = false;
 			this.InfoBtn.Click += new System.EventHandler(this.InfoBtn_Click);
 			// 
