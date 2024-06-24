@@ -79,7 +79,7 @@
 			this.BackBtn.Name = "BackBtn";
 			this.BackBtn.Size = new System.Drawing.Size(167, 28);
 			this.BackBtn.TabIndex = 2;
-			this.BackBtn.Text = "Back";
+			this.BackBtn.Text = "Wróć";
 			this.BackBtn.UseVisualStyleBackColor = false;
 			this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
 			// 
@@ -92,7 +92,7 @@
 			this.Controls.Add(this.BookBorrowingGridView);
 			this.Controls.Add(this.TitleText);
 			this.Name = "InfoForm";
-			this.Text = "InfoForm";
+			this.Text = "Szczegóły";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			((System.ComponentModel.ISupportInitialize)(this.TitleText.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.BookBorrowingGridView)).EndInit();
