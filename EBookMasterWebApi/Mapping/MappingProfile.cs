@@ -17,6 +17,16 @@ namespace EBookMasterWebApi.Mapping
 				.ForMember(x => x.Subscription, y => y.Ignore())
 				.ForMember(x => x.LibraryCardNumber, y => y.Ignore())
 				.ForMember(x => x.BookBorrowings, y => y.Ignore());
+
+			CreateMap<Book, BookDTO>()
+				.ForMember(x => x.Borrowed, y => y.Ignore())
+				.ForMember(x => x.NotAllowed, y => y.Ignore());
+
+			CreateMap<PublishingHouse, PublishingHouseDTO>();
+			CreateMap<Series, SeriesDTO>();
+			CreateMap<Author, AuthorDTO>();
+			CreateMap<Category, CategoryDTO>();
+			CreateMap<Recommendation, RecommendationDTO>();
 		}
 	}
 }

@@ -1,0 +1,27 @@
+<div class="book-list">
+  <h2>Lista książek</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Tytuł</th>
+        <th>Autor</th>
+        <th>Seria</th>
+        <th>Kategoria</th>
+        <th>Data wydania</th>
+        <th>Wydawnictwo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{ book.title }}</td>
+        <td>{{ getAuthors(book.authors) }}</td>
+        <td>{{ book.series?.name ?? '' }}</td>
+        <td>{{ getCategories(book.categories) }}</td>
+        <td>{{ book.publicationYear | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ book.publishingHouse.name }} ({{ book.publishingHouse.country }})</td>
+        <td><button class="btn-borrow" [class.return]="book.borrowed" [disabled]="book.notAllowed">{{ book.borrowed ? 'Zwróć' : 'Wypożycz' }}</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

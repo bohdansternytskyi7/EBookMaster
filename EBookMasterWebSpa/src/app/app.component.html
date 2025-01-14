@@ -1,6 +1,7 @@
 <nav>
   <ul>
     <li><a routerLink="/home">E-Book Master</a></li>
+    <li *ngIf="isLoggedIn"><a routerLink="/books">E-Booki</a></li>
     <li *ngIf="isLoggedIn"><a routerLink="/borrowings">Wypożyczenia</a></li>
     <li *ngIf="!isLoggedIn"><a routerLink="/register">Rejestracja</a></li>
     <li *ngIf="!isLoggedIn"><a routerLink="/login">Logowanie</a></li>

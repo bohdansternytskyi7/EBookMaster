@@ -1,25 +1,25 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Book } from '../models/book';
 import { BorrowingService } from 'src/app/services/borrowing.service';
-import { BookBorrowing } from '../models/book-borrowing';
 import { Author } from '../models/author';
 import { Category } from '../models/category';
 
 @Component({
-  selector: 'app-borrowing-page',
-  templateUrl: './borrowing-page.component.html',
-  styleUrls: ['./borrowing-page.component.scss']
+  selector: 'app-book-page',
+  templateUrl: './book-page.component.html',
+  styleUrls: ['./book-page.component.scss']
 })
-export class BorrowingPageComponent implements OnInit, OnDestroy {
+export class BookPageComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
 
-  borrowings: BookBorrowing[] = [];
+  books: Book[] = [];
 
   constructor(private borrowingService: BorrowingService) { }
 
   ngOnInit(): void {
-    this.borrowingService.loadBorrowingHistory();
-    this.subs.push(this.borrowingService.borrowings$.subscribe(borrowings => this.borrowings = borrowings));
+    this.borrowingService.loadBooks();
+    this.subs.push(this.borrowingService.books$.subscribe(books => this.books = books));
   }
 
   ngOnDestroy(): void {
