@@ -1,0 +1,9 @@
+EBookMasterWebApi/bin/
+EBookMasterWebApi/obj/
+EBookMasterWebApi/.vs
+
+*.user
+*.log
+
+appsettings.Development.json
+appsettings.Local.json
