@@ -1,0 +1,17 @@
+<nav>
+  <ul>
+    <li><a routerLink="/home">E-Book Master</a></li>
+    <li *ngIf="isLoggedIn"><a routerLink="/borrowings">Wypożyczenia</a></li>
+    <li *ngIf="!isLoggedIn"><a routerLink="/register">Rejestracja</a></li>
+    <li *ngIf="!isLoggedIn"><a routerLink="/login">Logowanie</a></li>
+    <li *ngIf="isLoggedIn"><a (click)="logout()">Wyloguj się</a></li>
+  </ul>
+</nav>
+<div *ngIf="isLoading" class="message loading">Ładowanie danych...</div>
+<div *ngIf="message && !errorMessage" class="message">
+  <p>{{ message }}</p>
+</div>
+<div *ngIf="errorMessage">
+  <p class="message error">{{ errorMessage }}</p>
+</div>
+<router-outlet></router-outlet>

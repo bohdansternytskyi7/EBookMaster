@@ -1,6 +1,12 @@
 EBookMasterWebApi/bin/
 EBookMasterWebApi/obj/
 EBookMasterWebApi/.vs
+EBookMasterWebApi/logs.txt
+
+EBookMasterWebSpa/node_modules
+EBookMasterWebSpa/.vscode
+EBookMasterWebSpa/.editorconfig
+EBookMasterWebSpa/.angular
 
 *.user
 *.log

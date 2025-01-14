@@ -6,12 +6,14 @@ using EBookMaster.Middlewares;
 using EBookMasterWebApi.Mapping;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using EBookMasterWebApi.Services.Interfaces;
+using EBookMasterWebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<EBookMasterDbContext>(opt =>
 {
-	opt.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings:DefaultConnection").Value);
+	opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 builder.Services.AddControllers().AddJsonOptions(opt =>
@@ -48,14 +50,16 @@ builder.Services.AddCors(options =>
 	options.AddPolicy("AllowAllOrigins", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
+builder.Services.AddMemoryCache();
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+builder.Services.AddScoped<IAccountsService, AccountsService>();
 builder.Services.AddControllers();
-builder.Services.AddAutoMapper(typeof(BookBorrowingMappingProfile).Assembly);
 
 var app = builder.Build();
 app.UseCors("AllowAllOrigins");
 app.UseHttpsRedirection();
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.UseMiddleware<LoggingMiddleware>();
 app.Run();

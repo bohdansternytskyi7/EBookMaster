@@ -163,10 +163,10 @@ namespace EBookMasterWebApi.Context
 						Name = "Bohdan",
 						Surname = "Sternytskyi",
 						Email = "s26028@pjwstk.edu.pl",
-						Password = "j45qsKROWKfK0uVI9jMPE715FxLsHJlFjy763a1J87I=",
-						Salt = "CTQnUwx4k4fhjcapvGoAlh96jMgz6zUHCfF6W7GH3oc=",
+						Password = "jZs/vfkieZcdBngxPAHzXuEDi5XZg0tOXXdtUooa1ag=",
+						Salt = "mZ5bf60ttVt+4Xx6FHpvFHx+Vx/pPUoYql9QO+G9t3Y=",
 						LibraryCardNumber = index++,
-						Role = Role.Reader,
+						Role = Role.Librarian,
 						SubscriptionId = 4
 					}
 				);

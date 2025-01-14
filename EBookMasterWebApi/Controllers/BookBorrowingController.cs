@@ -12,7 +12,7 @@ namespace EBookMaster.Controllers
 {
 	[Authorize]
 	[ApiController]
-	[Route("api/[controller]")]
+	[Route("[controller]")]
 	public class BookBorrowingController : Controller
 	{
 		private readonly EBookMasterDbContext _context;
@@ -21,6 +21,13 @@ namespace EBookMaster.Controllers
 		{
 			_context = context;
 			_mapper = mapper;
+		}
+
+		[AllowAnonymous]
+		[HttpGet("subscriptions")]
+		public async Task<IActionResult> GetSubscriptions()
+		{
+			return Ok(await _context.Subscriptions.ToListAsync());
 		}
 
 		[HttpGet("books")]
