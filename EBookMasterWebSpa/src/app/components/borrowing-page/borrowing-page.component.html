@@ -1,4 +1,4 @@
-<div *ngIf="borrowings.length  > 0" class="borrowing-list">
+<div *ngIf="borrowings.length  > 0; else noBorrowings" class="borrowing-list">
   <h2>Historia wypożyczeń</h2>
   <table>
     <thead>
@@ -19,3 +19,10 @@
     </tbody>
   </table>
 </div>
+<ng-template #noBorrowings>
+  <div class="empty-list">
+    <h2>Lista wypożyczeń jest pusta</h2>
+    <button class="btn-books" routerLink="/books">Zobacz dostępne książki</button>
+  </div>
+</ng-template>
+

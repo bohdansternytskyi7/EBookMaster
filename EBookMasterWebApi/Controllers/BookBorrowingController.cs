@@ -2,14 +2,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using EBookMasterWebApi.Context;
-using EBookMasterWebApi.Controllers;
 using EBookMasterWebApi.DTOs;
 using EBookMasterWebApi.Enums;
 using EBookMasterWebApi.Models;
 using Microsoft.EntityFrameworkCore;
 using EBookMasterWebApi.Services.Interfaces;
 
-namespace EBookMaster.Controllers
+namespace EBookMasterWebApi.Controllers
 {
 	[Authorize]
 	[ApiController]

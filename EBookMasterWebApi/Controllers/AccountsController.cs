@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using EBookMasterWebApi.Context;
-using EBookMasterWebApi.Controllers;
 using EBookMasterWebApi.DTOs;
 using EBookMasterWebApi.Enums;
 using EBookMasterWebApi.Services.Interfaces;
 
-namespace MedicalFacility.Controllers
+namespace EBookMasterWebApi.Controllers
 {
     [Authorize]
     [ApiController]
@@ -56,5 +56,27 @@ namespace MedicalFacility.Controllers
                 IsPremium = user.Subscription.Type == SubscriptionType.Premium
 			});
         }
-    }
+
+        [Authorize]
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+	        var user = await GetCurrentUserAsync();
+	        user.RefreshToken = null;
+	        user.RefreshTokenExpiration = null;
+	        await _context.SaveChangesAsync();
+
+	        var accessToken = Request.Headers.Authorization.FirstOrDefault()?.Split(" ").Last();
+	        if (!string.IsNullOrEmpty(accessToken))
+	        {
+		        var tokenHandler = new JwtSecurityTokenHandler();
+		        var jwtToken = tokenHandler.ReadJwtToken(accessToken);
+		        var jti = jwtToken.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti)?.Value;
+
+		        if (!string.IsNullOrEmpty(jti))
+			        _accountsService.BlacklistToken(jti);
+	        }
+	        return Ok();
+        }
+	}
 }

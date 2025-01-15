@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { BorrowingService } from './borrowing.service';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private borrowingService: BorrowingService
+    private borrowingService: BorrowingService,
+    private loadingService: LoadingService
   ) {}
 
   login(credentials: { email: string, password: string }): Observable<any> {
@@ -50,6 +52,11 @@ export class AuthService {
   }
 
   logout(): void {
+    this.loadingService.showLoading();
+    this.http.post(`${this.apiUrl}/logout`, null).subscribe(response => {
+      this.loadingService.hideLoading();
+      this.loadingService.showMessage("Wylogowano pomyślnie.");
+    });
     sessionStorage.removeItem('accessToken');
     sessionStorage.removeItem('isPremium');
     this.borrowingService.clearAllSubjects();

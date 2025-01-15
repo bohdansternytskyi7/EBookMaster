@@ -1,3 +1,5 @@
+@import './config.scss';
+
 * {
   box-sizing: border-box;
   font-family: "Libre Baskerville", serif;
@@ -6,4 +8,37 @@
 
 body {
   margin: 0;
+}
+
+.btn-borrow, .btn-books {
+  color: white;
+  padding: .8rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: $primary-color;
+
+  &:hover {
+    background-color: $primary-darker-color;
+    transform: translateY(-2px);
+  }
+
+  &.return {
+    background-color: $orange-color;
+
+    &:hover {
+      background-color: $orange-darker-color;
+    }
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      transform: none;
+    }
+  }
 }
