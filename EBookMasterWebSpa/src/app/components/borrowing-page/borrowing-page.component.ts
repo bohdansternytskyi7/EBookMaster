@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { BorrowingService } from 'src/app/services/borrowing.service';
 import { BookBorrowing } from '../models/book-borrowing';
 import { Author } from '../models/author';
-import { Category } from '../models/category';
 
 @Component({
   selector: 'app-borrowing-page',

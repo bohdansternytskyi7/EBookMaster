@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingService } from 'src/app/services/loading.service';
-import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -30,14 +29,12 @@ export class LoginComponent {
       return;
 
     this.loadingService.showLoading();
-    this.authService.login(this.loginForm.value).pipe(finalize(
-      () => this.loadingService.hideLoading())
-    ).subscribe({
+    this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         this.authService.saveToken(response.accessToken);
         this.authService.setLoggedIn(true);
         this.authService.setIsPremium(response.isPremium);
-        this.loadingService.showMessage('Zalogowano pomyślnie');
+        this.loadingService.showMessage('Zalogowano pomyślnie.');
         this.router.navigate(['/books']);
       },
       error: (error) => {

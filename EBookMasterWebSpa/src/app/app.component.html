@@ -8,11 +8,13 @@
     <li *ngIf="isLoggedIn"><a (click)="logout()">Wyloguj się</a></li>
   </ul>
 </nav>
-<div *ngIf="isLoading" class="message loading">Ładowanie danych...</div>
-<div *ngIf="message && !errorMessage" class="message">
+<div class="loading-overlay" *ngIf="isLoading">
+  <div class="spinner"></div>
+</div>
+<div class="message" *ngIf="message">
   <p>{{ message }}</p>
 </div>
-<div *ngIf="errorMessage">
-  <p class="message error">{{ errorMessage }}</p>
+<div class="message error" *ngIf="errorMessage">
+  <p>{{ errorMessage }}</p>
 </div>
 <router-outlet></router-outlet>

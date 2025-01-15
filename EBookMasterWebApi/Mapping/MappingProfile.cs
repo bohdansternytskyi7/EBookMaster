@@ -22,11 +22,22 @@ namespace EBookMasterWebApi.Mapping
 				.ForMember(x => x.Borrowed, y => y.Ignore())
 				.ForMember(x => x.NotAllowed, y => y.Ignore());
 
-			CreateMap<PublishingHouse, PublishingHouseDTO>();
-			CreateMap<Series, SeriesDTO>();
-			CreateMap<Author, AuthorDTO>();
-			CreateMap<Category, CategoryDTO>();
-			CreateMap<Recommendation, RecommendationDTO>();
+			CreateMap<PublishingHouse, PublishingHouseDTO>()
+				.ForMember(x => x.Books, y => y.Ignore());
+
+			CreateMap<Series, SeriesDTO>()
+				.ForMember(x => x.Books, y => y.Ignore());
+
+			CreateMap<Author, AuthorDTO>()
+				.ForMember(x => x.Books, y => y.Ignore());
+
+			CreateMap<Category, CategoryDTO>()
+				.ForMember(x => x.Books, y => y.Ignore());
+
+			CreateMap<Recommendation, RecommendationDTO>()
+				.ForMember(x => x.RecommendedBooks, y => y.Ignore());
+
+			CreateMap<BookBorrowing, BookBorrowingDTO>();
 		}
 	}
 }

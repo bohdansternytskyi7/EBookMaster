@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, catchError, finalize, Observable } from 'rxjs';
 import { UserSubscription } from '../components/models/user-subscription';
@@ -98,5 +98,11 @@ export class BorrowingService {
     ).subscribe({
       next: data => this._borrowings.next(data as BookBorrowing[])
     });
+  }
+
+  clearAllSubjects(): void {
+    this._books.next([]);
+    this._borrowings.next([]);
+    this._subscriptions.next([]);
   }
 }

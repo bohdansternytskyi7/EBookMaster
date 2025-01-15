@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { LoadingService } from './services/loading.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,6 @@ export class AppComponent {
   private subs: Subscription[] = [];
 
   isLoggedIn: boolean = false;
-  isAdmin: boolean = false;
   isLoading: boolean = false;
   message: string | null = null;
   errorMessage: string | null = null;
@@ -25,11 +25,12 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.authService.tryGetToken();
-    this.subs.push(this.authService.isLoggedIn$.subscribe(value => this.isLoggedIn = value));
-    this.subs.push(this.loadingService.message$.subscribe(msg => this.message = msg));
-    this.subs.push(this.loadingService.errorMessage$.subscribe(msg => this.errorMessage = msg));
-    this.subs.push(this.loadingService.isLoading$.subscribe(value => {
-      this.isLoading = value;
+    this.authService.tryGetPremium();
+    this.subs.push(this.authService.isLoggedIn$.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn));
+    this.subs.push(this.loadingService.message$.subscribe(message => this.message = message));
+    this.subs.push(this.loadingService.errorMessage$.subscribe(errorMessage => this.errorMessage = errorMessage));
+    this.subs.push(this.loadingService.isLoading$.subscribe(isLoading => {
+      this.isLoading = isLoading;
       this.changeDetectorRef.detectChanges();
     }));
   }

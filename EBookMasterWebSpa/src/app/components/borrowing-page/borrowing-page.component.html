@@ -1,4 +1,4 @@
-<div class="borrowing-list">
+<div *ngIf="borrowings.length  > 0" class="borrowing-list">
   <h2>Historia wypożyczeń</h2>
   <table>
     <thead>
@@ -13,8 +13,8 @@
       <tr *ngFor="let borrowing of borrowings">
         <td>{{ borrowing.book.title }}</td>
         <td>{{ getAuthors(borrowing.book.authors) }}</td>
-        <td>{{ borrowing.borrowingDate | date: 'dd-MM-yyyy' }}</td>
-        <td>{{ borrowing.returnDate | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ borrowing.borrowingDate | date: 'dd-MM-yyyy HH:mm' }}</td>
+        <td>{{ borrowing.returnDate | date: 'dd-MM-yyyy HH:mm' }}</td>
       </tr>
     </tbody>
   </table>

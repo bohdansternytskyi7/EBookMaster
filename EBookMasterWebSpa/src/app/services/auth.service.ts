@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { BorrowingService } from './borrowing.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private borrowingService: BorrowingService
   ) {}
 
   login(credentials: { email: string, password: string }): Observable<any> {
@@ -39,6 +41,7 @@ export class AuthService {
   }
 
   setIsPremium(value: boolean): void {
+    sessionStorage.setItem('isPremium', 'true');
     this._isPremium.next(value);
   }
 
@@ -48,16 +51,26 @@ export class AuthService {
 
   logout(): void {
     sessionStorage.removeItem('accessToken');
+    sessionStorage.removeItem('isPremium');
+    this.borrowingService.clearAllSubjects();
     this._isLoggedIn.next(false);
+    this._isPremium.next(false);
     this.router.navigate(['/']);
+  }
+
+  tryGetPremium(): void {
+    const isPremium = sessionStorage.getItem('isPremium');
+    if (isPremium === 'true')
+      this._isPremium.next(true);
+    else
+      this._isPremium.next(false);
   }
 
   tryGetToken(): void {
     const token = sessionStorage.getItem('accessToken');
-    if (token) {
+    if (token)
       this._isLoggedIn.next(true);
-      return;
-    }
-    this._isLoggedIn.next(false);
+    else
+      this._isLoggedIn.next(false);
   }
 }
