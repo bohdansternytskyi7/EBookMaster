@@ -35,7 +35,10 @@ namespace MedicalFacility.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginRequestDTO loginRequest)
         {
-            var user = await _context.Users.Where(x => x.Email == loginRequest.Email).FirstOrDefaultAsync();
+            var user = await _context.Users
+	            .Include(x => x.Subscription)
+	            .Where(x => x.Email == loginRequest.Email)
+	            .FirstOrDefaultAsync();
             if (user == null)
                 return BadRequest();
 
@@ -48,8 +51,9 @@ namespace MedicalFacility.Controllers
 
             return Ok(new
             {
-                accessToken = _accountsService.GenerateAccessToken(user),
-				user.RefreshToken
+                AccessToken = _accountsService.GenerateAccessToken(user),
+				RefreshToken = user.RefreshToken,
+                IsPremium = user.Subscription.Type == SubscriptionType.Premium
 			});
         }
     }

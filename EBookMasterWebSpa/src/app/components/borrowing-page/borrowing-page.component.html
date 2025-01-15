@@ -5,20 +5,16 @@
       <tr>
         <th>Tytuł</th>
         <th>Autor</th>
-        <th>Seria</th>
-        <th>Kategoria</th>
-        <th>Rok wydania</th>
-        <th>Wydawnictwo</th>
+        <th>Data wypożyczenia</th>
+        <th>Data zwrotu</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let borrowing of borrowings">
         <td>{{ borrowing.book.title }}</td>
         <td>{{ getAuthors(borrowing.book.authors) }}</td>
-        <td>{{ borrowing.book.series?.name ?? '' }}</td>
-        <td>{{ getCategories(borrowing.book.categories) }}</td>
-        <td>{{ borrowing.book.publicationYear | date: 'dd-MM-yyyy' }}</td>
-        <td>{{ borrowing.book.publishingHouse.name }} ({{ borrowing.book.publishingHouse.country }})</td>
+        <td>{{ borrowing.borrowingDate | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ borrowing.returnDate | date: 'dd-MM-yyyy' }}</td>
       </tr>
     </tbody>
   </table>

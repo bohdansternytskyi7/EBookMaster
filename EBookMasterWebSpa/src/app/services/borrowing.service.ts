@@ -5,6 +5,7 @@ import { UserSubscription } from '../components/models/user-subscription';
 import { LoadingService } from './loading.service';
 import { BookBorrowing } from '../components/models/book-borrowing';
 import { Book } from '../components/models/book';
+import { Author } from '../components/models/author';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,43 @@ export class BorrowingService {
     private http: HttpClient,
     private loadingService: LoadingService
   ) {}
+
+  getAuthors(authors: Author[] | undefined): string {
+    if (!authors) return '';
+    return authors.map(author => `${author.name} ${author.surname}`).join(', ');
+  }
+
+  borrowBook(id: number): void {
+    this.loadingService.showLoading();
+    this.http.post(`${this.apiUrl}/borrow?id=${id}`, null).pipe(
+      finalize(() => this.loadingService.hideLoading()),
+      catchError(error => {
+        this.loadingService.showErrorMessage('Wystąpił błąd podczas wypożyczenia książki. Sprawdź swoją subskrypcję.');
+        return [];
+      })
+    ).subscribe({
+      next: data => {
+        this.loadBooks();
+        this.loadingService.showMessage('Książka zostałą wypożyczona.');
+      }
+    });
+  }
+
+  returnBook(id: number): void {
+    this.loadingService.showLoading();
+    this.http.post(`${this.apiUrl}/return?id=${id}`, null).pipe(
+      finalize(() => this.loadingService.hideLoading()),
+      catchError(error => {
+        this.loadingService.showErrorMessage('Wystąpił błąd podczas zwracania książki.');
+        return [];
+      })
+    ).subscribe({
+      next: data => {
+        this.loadBooks();
+        this.loadingService.showMessage('Książka zostałą zwrócona.');
+      }
+    });
+  }
 
   loadSubscriptions(): void {
     this.http.get<UserSubscription[]>(`${this.apiUrl}/subscriptions`).pipe(

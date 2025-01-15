@@ -27,12 +27,6 @@ export class BorrowingPageComponent implements OnInit, OnDestroy {
   }
 
   getAuthors(authors: Author[] | undefined): string {
-    if (!authors) return '';
-    return authors.map(author => `${author.name} ${author.surname}`).join(', ');
-  }
-
-  getCategories(categories: Category[] | undefined): string {
-    if (!categories) return '';
-    return categories.map(category => category.name).join(', ');
+    return this.borrowingService.getAuthors(authors);
   }
 }

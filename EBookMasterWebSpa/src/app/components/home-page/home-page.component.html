@@ -4,7 +4,7 @@
     <p class="description">
       Twój nowoczesny system zarządzania biblioteką cyfrową. Szybki dostęp do e-booków, artykułów i audiobooków w jednym miejscu.
     </p>
-    <div class="actions">
+    <div *ngIf="!isLoggedIn" class="actions">
       <a routerLink="/login" class="button button--primary">Zaloguj się</a>
       <a routerLink="/register" class="button button--secondary">Zarejestruj się</a>
     </div>

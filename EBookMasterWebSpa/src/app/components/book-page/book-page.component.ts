@@ -4,6 +4,7 @@ import { Book } from '../models/book';
 import { BorrowingService } from 'src/app/services/borrowing.service';
 import { Author } from '../models/author';
 import { Category } from '../models/category';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-book-page',
@@ -14,11 +15,16 @@ export class BookPageComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
 
   books: Book[] = [];
+  userIsPremium: boolean = false;
 
-  constructor(private borrowingService: BorrowingService) { }
+  constructor(
+    private authService: AuthService,
+    private borrowingService: BorrowingService
+  ) { }
 
   ngOnInit(): void {
     this.borrowingService.loadBooks();
+    this.subs.push(this.authService.isPremium$.subscribe(isPremium => this.userIsPremium = isPremium));
     this.subs.push(this.borrowingService.books$.subscribe(books => this.books = books));
   }
 
@@ -27,12 +33,18 @@ export class BookPageComponent implements OnInit, OnDestroy {
   }
 
   getAuthors(authors: Author[] | undefined): string {
-    if (!authors) return '';
-    return authors.map(author => `${author.name} ${author.surname}`).join(', ');
+    return this.borrowingService.getAuthors(authors);
   }
 
   getCategories(categories: Category[] | undefined): string {
     if (!categories) return '';
     return categories.map(category => category.name).join(', ');
+  }
+
+  toggleBorrow(book: Book): void {
+    if (book.borrowed)
+      this.borrowingService.returnBook(book.id);
+    else
+      this.borrowingService.borrowBook(book.id);
   }
 }

@@ -97,7 +97,9 @@ namespace EBookMasterWebApi.Migrations
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     PublishingHouseId = table.Column<int>(type: "int", nullable: false),
                     PublicationYear = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SeriesId = table.Column<int>(type: "int", nullable: true)
+                    SeriesId = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    IsPremium = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -401,23 +403,23 @@ namespace EBookMasterWebApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "Books",
-                columns: new[] { "Id", "PublicationYear", "PublishingHouseId", "SeriesId", "Title" },
+                columns: new[] { "Id", "IsPremium", "PublicationYear", "PublishingHouseId", "SeriesId", "Status", "Title" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1954, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, "The Fellowship of the Ring" },
-                    { 2, new DateTime(1954, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, "The Two Towers" },
-                    { 3, new DateTime(1997, 6, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, "Harry Potter and the Philosopher's Stone" },
-                    { 4, new DateTime(1998, 7, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, "Harry Potter and the Chamber of Secrets" },
-                    { 5, new DateTime(1988, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, "A Brief History of Time" },
-                    { 6, new DateTime(2008, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 6, "The Hunger Games" },
-                    { 7, new DateTime(2009, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 6, "Catching Fire" },
-                    { 8, new DateTime(2010, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 6, "Mockingjay" }
+                    { 1, true, new DateTime(1954, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 1, "The Fellowship of the Ring" },
+                    { 2, false, new DateTime(1954, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 1, "The Two Towers" },
+                    { 3, false, new DateTime(1997, 6, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, 1, "Harry Potter and the Philosopher's Stone" },
+                    { 4, true, new DateTime(1998, 7, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, 1, "Harry Potter and the Chamber of Secrets" },
+                    { 5, true, new DateTime(1988, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, "A Brief History of Time" },
+                    { 6, true, new DateTime(2008, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 6, 1, "The Hunger Games" },
+                    { 7, false, new DateTime(2009, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 6, 1, "Catching Fire" },
+                    { 8, false, new DateTime(2010, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 6, 1, "Mockingjay" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "LibraryCardNumber", "Name", "Password", "RefreshToken", "RefreshTokenExpiration", "Role", "Salt", "SubscriptionId", "Surname" },
-                values: new object[] { 1, "s26028@pjwstk.edu.pl", 1, "Bohdan", "j45qsKROWKfK0uVI9jMPE715FxLsHJlFjy763a1J87I=", null, null, 2, "CTQnUwx4k4fhjcapvGoAlh96jMgz6zUHCfF6W7GH3oc=", 4, "Sternytskyi" });
+                values: new object[] { 1, "s26028@pjwstk.edu.pl", 1, "Bohdan", "jZs/vfkieZcdBngxPAHzXuEDi5XZg0tOXXdtUooa1ag=", null, null, 1, "mZ5bf60ttVt+4Xx6FHpvFHx+Vx/pPUoYql9QO+G9t3Y=", 4, "Sternytskyi" });
 
             migrationBuilder.InsertData(
                 table: "AuthorBook",
@@ -442,13 +444,13 @@ namespace EBookMasterWebApi.Migrations
                 columns: new[] { "Id", "BookId", "BorrowingDate", "ReturnDate", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 2, new DateTime(2023, 5, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, 3, new DateTime(2023, 6, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 3, 4, new DateTime(2023, 6, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 7, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 4, 2, new DateTime(2023, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 8, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 5, 1, new DateTime(2023, 5, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 6, 5, new DateTime(2023, 7, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 8, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 7, 6, new DateTime(2023, 8, 1, 16, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 16, 0, 0, 0, DateTimeKind.Unspecified), 1 }
+                    { 1, 2, new DateTime(2024, 5, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, 3, new DateTime(2024, 6, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 3, 4, new DateTime(2024, 6, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 4, 2, new DateTime(2024, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), null, 1 },
+                    { 5, 1, new DateTime(2024, 5, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 6, 5, new DateTime(2024, 7, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 8, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 7, 6, new DateTime(2024, 8, 1, 16, 0, 0, 0, DateTimeKind.Unspecified), null, 1 }
                 });
 
             migrationBuilder.InsertData(

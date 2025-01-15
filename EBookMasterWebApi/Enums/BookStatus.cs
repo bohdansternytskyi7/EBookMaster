@@ -4,6 +4,7 @@
 	{
 		Available = 1,
 		Borrowed = 2,
-		NotAllowed = 3
+		NotAllowed = 3,
+		UnAvailable = 4
 	}
 }

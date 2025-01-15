@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using EBookMasterWebApi.Attributes;
+using EBookMasterWebApi.Enums;
 
 namespace EBookMasterWebApi.Models
 {
@@ -22,6 +24,13 @@ namespace EBookMasterWebApi.Models
 
 		[ForeignKey(nameof(SeriesId))]
 		public Series Series { get; set; }
+
+		[Required]
+		[AllowedBookStatus(BookStatus.Available, BookStatus.UnAvailable)]
+		public BookStatus Status { get; set; }
+
+		[Required]
+		public bool IsPremium { get; set; }
 
 		public ICollection<Author> Authors { get; set; } = new List<Author>();
 

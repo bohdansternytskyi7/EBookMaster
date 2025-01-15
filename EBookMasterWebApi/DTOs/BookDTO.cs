@@ -12,5 +12,6 @@
 		public ICollection<RecommendationDTO> Recommendations { get; set; }
 		public bool Borrowed { get; set; }
 		public bool NotAllowed { get; set; }
+		public bool IsPremium { get; set; }
 	}
 }

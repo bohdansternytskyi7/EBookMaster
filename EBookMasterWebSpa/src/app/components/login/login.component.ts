@@ -36,8 +36,9 @@ export class LoginComponent {
       next: (response) => {
         this.authService.saveToken(response.accessToken);
         this.authService.setLoggedIn(true);
+        this.authService.setIsPremium(response.isPremium);
         this.loadingService.showMessage('Zalogowano pomyślnie');
-        this.router.navigate(['/borrowings']);
+        this.router.navigate(['/books']);
       },
       error: (error) => {
         this.loadingService.showErrorMessage('Niepoprawne dane logowania.');

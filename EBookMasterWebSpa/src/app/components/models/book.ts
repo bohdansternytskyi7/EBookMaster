@@ -17,4 +17,5 @@ export interface Book {
   recommendations: Recommendation[] | undefined;
   borrowed: boolean;
   notAllowed: boolean;
+  isPremium: boolean;
 }

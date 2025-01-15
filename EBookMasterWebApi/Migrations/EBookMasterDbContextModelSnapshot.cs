@@ -292,6 +292,9 @@ namespace EBookMasterWebApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsPremium")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("PublicationYear")
                         .HasColumnType("datetime2");
 
@@ -299,6 +302,9 @@ namespace EBookMasterWebApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("SeriesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -318,64 +324,80 @@ namespace EBookMasterWebApi.Migrations
                         new
                         {
                             Id = 1,
+                            IsPremium = true,
                             PublicationYear = new DateTime(1954, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublishingHouseId = 1,
                             SeriesId = 1,
+                            Status = 1,
                             Title = "The Fellowship of the Ring"
                         },
                         new
                         {
                             Id = 2,
+                            IsPremium = false,
                             PublicationYear = new DateTime(1954, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublishingHouseId = 1,
                             SeriesId = 1,
+                            Status = 1,
                             Title = "The Two Towers"
                         },
                         new
                         {
                             Id = 3,
+                            IsPremium = false,
                             PublicationYear = new DateTime(1997, 6, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublishingHouseId = 2,
                             SeriesId = 2,
+                            Status = 1,
                             Title = "Harry Potter and the Philosopher's Stone"
                         },
                         new
                         {
                             Id = 4,
+                            IsPremium = true,
                             PublicationYear = new DateTime(1998, 7, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublishingHouseId = 2,
                             SeriesId = 2,
+                            Status = 1,
                             Title = "Harry Potter and the Chamber of Secrets"
                         },
                         new
                         {
                             Id = 5,
+                            IsPremium = true,
                             PublicationYear = new DateTime(1988, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublishingHouseId = 1,
+                            Status = 1,
                             Title = "A Brief History of Time"
                         },
                         new
                         {
                             Id = 6,
+                            IsPremium = true,
                             PublicationYear = new DateTime(2008, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublishingHouseId = 2,
                             SeriesId = 6,
+                            Status = 1,
                             Title = "The Hunger Games"
                         },
                         new
                         {
                             Id = 7,
+                            IsPremium = false,
                             PublicationYear = new DateTime(2009, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublishingHouseId = 2,
                             SeriesId = 6,
+                            Status = 1,
                             Title = "Catching Fire"
                         },
                         new
                         {
                             Id = 8,
+                            IsPremium = false,
                             PublicationYear = new DateTime(2010, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublishingHouseId = 2,
                             SeriesId = 6,
+                            Status = 1,
                             Title = "Mockingjay"
                         });
                 });
@@ -413,56 +435,54 @@ namespace EBookMasterWebApi.Migrations
                         {
                             Id = 1,
                             BookId = 2,
-                            BorrowingDate = new DateTime(2023, 5, 20, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2023, 6, 20, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2024, 5, 20, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2024, 6, 20, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
                             BookId = 3,
-                            BorrowingDate = new DateTime(2023, 6, 1, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2023, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2024, 6, 1, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2024, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 3,
                             BookId = 4,
-                            BorrowingDate = new DateTime(2023, 6, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2023, 7, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2024, 6, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2024, 7, 10, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 4,
                             BookId = 2,
-                            BorrowingDate = new DateTime(2023, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2023, 8, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2024, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 5,
                             BookId = 1,
-                            BorrowingDate = new DateTime(2023, 5, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2023, 6, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2024, 5, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2024, 6, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 6,
                             BookId = 5,
-                            BorrowingDate = new DateTime(2023, 7, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2023, 8, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2024, 7, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2024, 8, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         },
                         new
                         {
                             Id = 7,
                             BookId = 6,
-                            BorrowingDate = new DateTime(2023, 8, 1, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2023, 9, 1, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            BorrowingDate = new DateTime(2024, 8, 1, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
                         });
                 });
@@ -943,9 +963,9 @@ namespace EBookMasterWebApi.Migrations
                             Email = "s26028@pjwstk.edu.pl",
                             LibraryCardNumber = 1,
                             Name = "Bohdan",
-                            Password = "j45qsKROWKfK0uVI9jMPE715FxLsHJlFjy763a1J87I=",
-                            Role = 2,
-                            Salt = "CTQnUwx4k4fhjcapvGoAlh96jMgz6zUHCfF6W7GH3oc=",
+                            Password = "jZs/vfkieZcdBngxPAHzXuEDi5XZg0tOXXdtUooa1ag=",
+                            Role = 1,
+                            Salt = "mZ5bf60ttVt+4Xx6FHpvFHx+Vx/pPUoYql9QO+G9t3Y=",
                             SubscriptionId = 4,
                             Surname = "Sternytskyi"
                         });

@@ -9,8 +9,10 @@ import { Router } from '@angular/router';
 export class AuthService {
   private apiUrl = 'https://localhost:44395/accounts';
   private _isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private _isPremium: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   isLoggedIn$: Observable<boolean> = this._isLoggedIn.asObservable();
+  isPremium$: Observable<boolean> = this._isPremium.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -34,6 +36,10 @@ export class AuthService {
     setTimeout(() => {
       this.logout();
     }, 900000);
+  }
+
+  setIsPremium(value: boolean): void {
+    this._isPremium.next(value);
   }
 
   getToken(): string | null {

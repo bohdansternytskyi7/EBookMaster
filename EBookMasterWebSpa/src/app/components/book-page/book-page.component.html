@@ -10,6 +10,7 @@
         <th>Data wydania</th>
         <th>Wydawnictwo</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -20,7 +21,8 @@
         <td>{{ getCategories(book.categories) }}</td>
         <td>{{ book.publicationYear | date: 'dd-MM-yyyy' }}</td>
         <td>{{ book.publishingHouse.name }} ({{ book.publishingHouse.country }})</td>
-        <td><button class="btn-borrow" [class.return]="book.borrowed" [disabled]="book.notAllowed">{{ book.borrowed ? 'Zwróć' : 'Wypożycz' }}</button></td>
+        <td><p [class.premium]="book.isPremium">{{ book.isPremium ? 'Premium' : '' }}</p></td>
+        <td><button class="btn-borrow" [class.return]="book.borrowed" [disabled]="book.notAllowed || (book.isPremium && !userIsPremium)" (click)="toggleBorrow(book)">{{ book.borrowed ? 'Zwróć' : 'Wypożycz' }}</button></td>
       </tr>
     </tbody>
   </table>
