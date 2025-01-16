@@ -15,7 +15,9 @@ export class BookPageComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
 
   books: Book[] = [];
+  filteredBooks: Book[] = [];
   userIsPremium: boolean = false;
+  filter: string = '';
 
   constructor(
     private authService: AuthService,
@@ -25,7 +27,10 @@ export class BookPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.borrowingService.loadBooks();
     this.subs.push(this.authService.isPremium$.subscribe(isPremium => this.userIsPremium = isPremium));
-    this.subs.push(this.borrowingService.books$.subscribe(books => this.books = books));
+    this.subs.push(this.borrowingService.books$.subscribe(books => {
+      this.books = books;
+      this.applyFilter();
+    }));
   }
 
   ngOnDestroy(): void {
@@ -37,8 +42,7 @@ export class BookPageComponent implements OnInit, OnDestroy {
   }
 
   getCategories(categories: Category[] | undefined): string {
-    if (!categories) return '';
-    return categories.map(category => category.name).join(', ');
+    return this.borrowingService.getCategories(categories);
   }
 
   toggleBorrow(book: Book): void {
@@ -46,5 +50,16 @@ export class BookPageComponent implements OnInit, OnDestroy {
       this.borrowingService.returnBook(book.id);
     else
       this.borrowingService.borrowBook(book.id);
+  }
+
+  applyFilter(): void {
+    const query = this.filter.toLowerCase();
+    this.filteredBooks = this.books.filter(book =>
+      this.getAuthors(book.authors).toLowerCase().includes(query)
+      || book.title.toLowerCase().includes(query)
+      || this.getCategories(book.categories).toLowerCase().includes(query)
+      || book.series?.name.toLowerCase().includes(query)
+      || book.publishingHouse.name.toLowerCase().includes(query)
+    );
   }
 }

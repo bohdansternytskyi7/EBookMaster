@@ -7,6 +7,7 @@
         <th>Autor</th>
         <th>Data wypożyczenia</th>
         <th>Data zwrotu</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -15,6 +16,7 @@
         <td>{{ getAuthors(borrowing.book.authors) }}</td>
         <td>{{ borrowing.borrowingDate | date: 'dd-MM-yyyy HH:mm' }}</td>
         <td>{{ borrowing.returnDate | date: 'dd-MM-yyyy HH:mm' }}</td>
+        <td><button class="btn-info" (click)="openDialog(borrowing)">Szczegóły</button></td>
       </tr>
     </tbody>
   </table>
@@ -25,4 +27,3 @@
     <button class="btn-books" routerLink="/books">Zobacz dostępne książki</button>
   </div>
 </ng-template>
-

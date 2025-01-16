@@ -53,7 +53,7 @@ namespace EBookMasterWebApi.Controllers
 		public async Task<IActionResult> GetBorrowHistoryAsync()
 		{
 			var userId = GetCurrentUserId();
-			var borrowings = await _context.BookBorrowings
+			return Ok(_mapper.Map<List<BookBorrowingDTO>>(await _context.BookBorrowings
 				.Include(x => x.Book)
 					.ThenInclude(b => b.Authors)
 				.Include(x => x.Book)
@@ -64,8 +64,7 @@ namespace EBookMasterWebApi.Controllers
 					.ThenInclude(b => b.PublishingHouse)
 				.Where(x => x.UserId == userId)
 				.OrderByDescending(x => x.BorrowingDate)
-				.ToListAsync();
-			return Ok(_mapper.Map<List<BookBorrowingDTO>>(borrowings));
+				.ToListAsync()));
 		}
 
 		[HttpPost("borrow")]

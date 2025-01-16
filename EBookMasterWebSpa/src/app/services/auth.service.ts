@@ -53,9 +53,13 @@ export class AuthService {
 
   logout(): void {
     this.loadingService.showLoading();
-    this.http.post(`${this.apiUrl}/logout`, null).subscribe(response => {
-      this.loadingService.hideLoading();
-      this.loadingService.showMessage("Wylogowano pomyślnie.");
+    this.http.post(`${this.apiUrl}/logout`, null).subscribe({
+      next: (response) => {
+        this.loadingService.hideLoading();
+        this.loadingService.showMessage("Wylogowano pomyślnie.");
+      }, error: (error) => {
+        this.loadingService.hideLoading();
+      }
     });
     sessionStorage.removeItem('accessToken');
     sessionStorage.removeItem('isPremium');

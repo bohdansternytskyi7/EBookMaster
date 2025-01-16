@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { BorrowingService } from 'src/app/services/borrowing.service';
 import { BookBorrowing } from '../models/book-borrowing';
 import { Author } from '../models/author';
+import { MatDialog } from '@angular/material/dialog';
+import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-borrowing-page',
@@ -14,7 +16,10 @@ export class BorrowingPageComponent implements OnInit, OnDestroy {
 
   borrowings: BookBorrowing[] = [];
 
-  constructor(private borrowingService: BorrowingService) { }
+  constructor(
+    public dialog: MatDialog,
+    private borrowingService: BorrowingService
+  ) { }
 
   ngOnInit(): void {
     this.borrowingService.loadBorrowingHistory();
@@ -27,5 +32,11 @@ export class BorrowingPageComponent implements OnInit, OnDestroy {
 
   getAuthors(authors: Author[] | undefined): string {
     return this.borrowingService.getAuthors(authors);
+  }
+
+  openDialog(borrowing: BookBorrowing): void {
+    this.dialog.open(InfoDialogComponent, {
+      data: borrowing
+    });
   }
 }

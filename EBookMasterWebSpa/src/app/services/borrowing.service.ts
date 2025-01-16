@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, catchError, finalize, Observable } from 'rxjs';
 import { UserSubscription } from '../components/models/user-subscription';
@@ -6,6 +6,7 @@ import { LoadingService } from './loading.service';
 import { BookBorrowing } from '../components/models/book-borrowing';
 import { Book } from '../components/models/book';
 import { Author } from '../components/models/author';
+import { Category } from '../components/models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,11 @@ export class BorrowingService {
   getAuthors(authors: Author[] | undefined): string {
     if (!authors) return '';
     return authors.map(author => `${author.name} ${author.surname}`).join(', ');
+  }
+
+  getCategories(categories: Category[] | undefined): string {
+    if (!categories) return '';
+    return categories.map(category => category.name).join(', ');
   }
 
   borrowBook(id: number): void {

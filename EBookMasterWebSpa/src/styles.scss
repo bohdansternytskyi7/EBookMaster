@@ -10,9 +10,9 @@ body {
   margin: 0;
 }
 
-.btn-borrow, .btn-books {
+.btn-borrow, .btn-books, .btn-info, .btn-close {
   color: white;
-  padding: .8rem 1.2rem;
+  padding: 0.8rem 1.2rem;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
@@ -40,5 +40,42 @@ body {
     &:hover {
       transform: none;
     }
+  }
+}
+
+.btn-close {
+  background-color: darken($red-darker-color, 10%);
+
+  &:hover {
+    background-color: darken($red-darker-color, 20%);
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+
+  th, td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    font-size: 1.2rem;
+  }
+
+  td {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
   }
 }

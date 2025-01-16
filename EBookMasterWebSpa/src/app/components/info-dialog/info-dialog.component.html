@@ -1,0 +1,38 @@
+<div class="info-container">
+  <h2>Szczegóły wypożyczenia</h2>
+  <div class="info-fields">
+    <div class="info-field">
+      <label>Data wypożyczenia:</label>
+      <span>{{ borrowing.borrowingDate | date: 'dd-MM-yyyy HH:mm' }}</span>
+    </div>
+    <div class="info-field">
+      <label>Data zwrotu:</label>
+      <span>{{ borrowing.returnDate ? (borrowing.returnDate | date: 'dd-MM-yyyy HH:mm') : 'Not Returned Yet' }}</span>
+    </div>
+    <div class="info-field">
+      <label>Tytuł:</label>
+      <span>{{ borrowing.book.title }}</span>
+    </div>
+    <div class="info-field">
+      <label>Autor:</label>
+      <span>{{ getAuthors(borrowing.book.authors) }}</span>
+    </div>
+    <div *ngIf="borrowing.book.series" class="info-field">
+      <label>Seria:</label>
+      <span>{{ borrowing.book.series.name }}</span>
+    </div>
+    <div class="info-field">
+      <label>Kategoria:</label>
+      <span>{{ getCategories(borrowing.book.categories) }}</span>
+    </div>
+    <div class="info-field">
+      <label>Data wydania:</label>
+      <span>{{ borrowing.book.publicationYear | date: 'dd-MM-yyyy' }}</span>
+    </div>
+    <div class="info-field">
+      <label>Wydawnictwo:</label>
+      <span>{{ borrowing.book.publishingHouse.name }}</span>
+    </div>
+  </div>
+  <button mat-dialog-close class="btn-close">Zamknij</button>
+</div>

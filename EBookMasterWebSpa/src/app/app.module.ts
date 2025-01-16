@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -15,6 +14,10 @@ import { BorrowingService } from './services/borrowing.service';
 import { LoadingService } from './services/loading.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { BookPageComponent } from './components/book-page/book-page.component';
+import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -23,14 +26,19 @@ import { BookPageComponent } from './components/book-page/book-page.component';
     RegisterComponent,
     HomePageComponent,
     BorrowingPageComponent,
-    BookPageComponent
+    BookPageComponent,
+    InfoDialogComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    NoopAnimationsModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     AuthService,

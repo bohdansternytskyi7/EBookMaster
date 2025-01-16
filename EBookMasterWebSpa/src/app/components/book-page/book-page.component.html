@@ -1,5 +1,10 @@
 <div *ngIf="books.length > 0" class="book-list">
   <h2>Lista książek</h2>
+  <div class="filter">
+    <div>
+      <input type="text" placeholder="Search" [(ngModel)]="filter" (input)="applyFilter()"/>
+    </div>
+  </div>
   <table>
     <thead>
       <tr>
@@ -14,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let book of books">
+      <tr *ngFor="let book of filteredBooks">
         <td>{{ book.title }}</td>
         <td>{{ getAuthors(book.authors) }}</td>
         <td>{{ book.series?.name ?? '' }}</td>
