@@ -75,7 +75,7 @@ namespace EBookMasterWebApi.Controllers
 				return NotFound();
 
 			var user = await GetCurrentUserAsync();
-			if (user.Subscription.Type != SubscriptionType.Premium && book.IsPremium)
+			if (user.UserSubscription.Subscription.Type != SubscriptionType.Premium && book.IsPremium)
 				return BadRequest("No 'Premium' subscription.");
 
 			if (await _context.BookBorrowings.Where(x => x.BookId == id && x.UserId == user.Id && x.ReturnDate == null).AnyAsync())

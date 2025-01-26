@@ -26,6 +26,7 @@ namespace EBookMasterWebApi.Context
 		public DbSet<Report> Reports { get; set; }
 		public DbSet<Notification> Notifications { get; set; }
 		public DbSet<Recommendation> Recommendations { get; set; }
+		public DbSet<UserSubscription> UserSubscriptions { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -153,6 +154,11 @@ namespace EBookMasterWebApi.Context
 				);
 			});
 
+			modelBuilder.Entity<UserSubscription>(e =>
+			{
+				e.HasData(new UserSubscription { Id = 1, SubscriptionId = 4, BeginDate = new DateTime(2025, 1, 1), EndDate = new DateTime(2025, 12, 31) });
+			});
+
 			modelBuilder.Entity<User>(e =>
 			{
 				var index = 1;
@@ -167,7 +173,7 @@ namespace EBookMasterWebApi.Context
 						Salt = "mZ5bf60ttVt+4Xx6FHpvFHx+Vx/pPUoYql9QO+G9t3Y=",
 						LibraryCardNumber = index++,
 						Role = Role.Librarian,
-						SubscriptionId = 4
+						UserSubscriptionId = 1
 					}
 				);
 			});

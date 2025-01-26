@@ -942,17 +942,17 @@ namespace EBookMasterWebApi.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("SubscriptionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("UserSubscriptionId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("SubscriptionId");
+                    b.HasIndex("UserSubscriptionId");
 
                     b.ToTable("Users");
 
@@ -966,8 +966,41 @@ namespace EBookMasterWebApi.Migrations
                             Password = "jZs/vfkieZcdBngxPAHzXuEDi5XZg0tOXXdtUooa1ag=",
                             Role = 1,
                             Salt = "mZ5bf60ttVt+4Xx6FHpvFHx+Vx/pPUoYql9QO+G9t3Y=",
-                            SubscriptionId = 4,
-                            Surname = "Sternytskyi"
+                            Surname = "Sternytskyi",
+                            UserSubscriptionId = 1
+                        });
+                });
+
+            modelBuilder.Entity("EBookMasterWebApi.Models.UserSubscription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("BeginDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SubscriptionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubscriptionId");
+
+                    b.ToTable("UserSubscriptions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BeginDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SubscriptionId = 4
                         });
                 });
 
@@ -1097,6 +1130,17 @@ namespace EBookMasterWebApi.Migrations
                 });
 
             modelBuilder.Entity("EBookMasterWebApi.Models.User", b =>
+                {
+                    b.HasOne("EBookMasterWebApi.Models.UserSubscription", "UserSubscription")
+                        .WithMany()
+                        .HasForeignKey("UserSubscriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserSubscription");
+                });
+
+            modelBuilder.Entity("EBookMasterWebApi.Models.UserSubscription", b =>
                 {
                     b.HasOne("EBookMasterWebApi.Models.Subscription", "Subscription")
                         .WithMany()

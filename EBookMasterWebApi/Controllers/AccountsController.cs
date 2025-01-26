@@ -36,7 +36,8 @@ namespace EBookMasterWebApi.Controllers
         public async Task<IActionResult> LoginAsync([FromBody] LoginRequestDTO loginRequest)
         {
             var user = await _context.Users
-	            .Include(x => x.Subscription)
+	            .Include(x => x.UserSubscription)
+					.ThenInclude(x => x.Subscription)
 	            .Where(x => x.Email == loginRequest.Email)
 	            .FirstOrDefaultAsync();
             if (user == null)
@@ -53,7 +54,7 @@ namespace EBookMasterWebApi.Controllers
             {
                 AccessToken = _accountsService.GenerateAccessToken(user),
 				RefreshToken = user.RefreshToken,
-                IsPremium = user.Subscription.Type == SubscriptionType.Premium
+                IsPremium = user.UserSubscription.Subscription.Type == SubscriptionType.Premium
 			});
         }
 

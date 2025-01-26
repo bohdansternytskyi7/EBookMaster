@@ -14,7 +14,7 @@ namespace EBookMasterWebApi.Mapping
 				.ForMember(x => x.RefreshToken, y => y.Ignore())
 				.ForMember(x => x.RefreshTokenExpiration, y => y.Ignore())
 				.ForMember(x => x.Role, y => y.Ignore())
-				.ForMember(x => x.Subscription, y => y.Ignore())
+				.ForMember(x => x.UserSubscription, y => y.Ignore())
 				.ForMember(x => x.LibraryCardNumber, y => y.Ignore())
 				.ForMember(x => x.BookBorrowings, y => y.Ignore());
 

@@ -16,7 +16,7 @@ namespace EBookMasterWebApi.Models
 
 		[Required]
 		[MaxLength(256)]
-		public string Salt { get; set; }
+		public string? Salt { get; set; }
 
 		[MaxLength(256)]
 		public string? RefreshToken { get; set; }
@@ -30,10 +30,10 @@ namespace EBookMasterWebApi.Models
 		public Role Role { get; set; }
 
 		[Required]
-		public int SubscriptionId { get; set; }
+		public int UserSubscriptionId { get; set; }
 
-		[ForeignKey(nameof(SubscriptionId))]
-		public Subscription Subscription { get; set; }
+		[ForeignKey(nameof(UserSubscriptionId))]
+		public UserSubscription UserSubscription { get; set; }
 
 		public ICollection<BookBorrowing> BookBorrowings { get; set; } = new List<BookBorrowing>();
 	}

@@ -38,6 +38,7 @@ export class LoginComponent {
         this.router.navigate(['/books']);
       },
       error: (error) => {
+        this.loadingService.hideLoading();
         this.loadingService.showErrorMessage('Niepoprawne dane logowania.');
       }
     });

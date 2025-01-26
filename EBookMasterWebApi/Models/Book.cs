@@ -23,7 +23,7 @@ namespace EBookMasterWebApi.Models
 		public int? SeriesId { get; set; }
 
 		[ForeignKey(nameof(SeriesId))]
-		public Series Series { get; set; }
+		public Series? Series { get; set; }
 
 		[Required]
 		[AllowedBookStatus(BookStatus.Available, BookStatus.UnAvailable)]

@@ -118,27 +118,20 @@ namespace EBookMasterWebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "UserSubscriptions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Salt = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    RefreshToken = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    RefreshTokenExpiration = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LibraryCardNumber = table.Column<int>(type: "int", nullable: false),
-                    Role = table.Column<int>(type: "int", nullable: false),
                     SubscriptionId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    BeginDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_UserSubscriptions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Subscriptions_SubscriptionId",
+                        name: "FK_UserSubscriptions_Subscriptions_SubscriptionId",
                         column: x => x.SubscriptionId,
                         principalTable: "Subscriptions",
                         principalColumn: "Id",
@@ -211,6 +204,34 @@ namespace EBookMasterWebApi.Migrations
                         name: "FK_Reports_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Salt = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    RefreshToken = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    RefreshTokenExpiration = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LibraryCardNumber = table.Column<int>(type: "int", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    UserSubscriptionId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_UserSubscriptions_UserSubscriptionId",
+                        column: x => x.UserSubscriptionId,
+                        principalTable: "UserSubscriptions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -417,9 +438,9 @@ namespace EBookMasterWebApi.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Email", "LibraryCardNumber", "Name", "Password", "RefreshToken", "RefreshTokenExpiration", "Role", "Salt", "SubscriptionId", "Surname" },
-                values: new object[] { 1, "s26028@pjwstk.edu.pl", 1, "Bohdan", "jZs/vfkieZcdBngxPAHzXuEDi5XZg0tOXXdtUooa1ag=", null, null, 1, "mZ5bf60ttVt+4Xx6FHpvFHx+Vx/pPUoYql9QO+G9t3Y=", 4, "Sternytskyi" });
+                table: "UserSubscriptions",
+                columns: new[] { "Id", "BeginDate", "EndDate", "SubscriptionId" },
+                values: new object[] { 1, new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), 4 });
 
             migrationBuilder.InsertData(
                 table: "AuthorBook",
@@ -440,20 +461,6 @@ namespace EBookMasterWebApi.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "BookBorrowings",
-                columns: new[] { "Id", "BookId", "BorrowingDate", "ReturnDate", "UserId" },
-                values: new object[,]
-                {
-                    { 1, 2, new DateTime(2024, 5, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, 3, new DateTime(2024, 6, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 3, 4, new DateTime(2024, 6, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 4, 2, new DateTime(2024, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), null, 1 },
-                    { 5, 1, new DateTime(2024, 5, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 6, 5, new DateTime(2024, 7, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 8, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 7, 6, new DateTime(2024, 8, 1, 16, 0, 0, 0, DateTimeKind.Unspecified), null, 1 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "BookCategory",
                 columns: new[] { "BooksId", "CategoriesId" },
                 values: new object[,]
@@ -467,6 +474,25 @@ namespace EBookMasterWebApi.Migrations
                     { 6, 7 },
                     { 7, 8 },
                     { 8, 8 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Email", "LibraryCardNumber", "Name", "Password", "RefreshToken", "RefreshTokenExpiration", "Role", "Salt", "Surname", "UserSubscriptionId" },
+                values: new object[] { 1, "s26028@pjwstk.edu.pl", 1, "Bohdan", "jZs/vfkieZcdBngxPAHzXuEDi5XZg0tOXXdtUooa1ag=", null, null, 1, "mZ5bf60ttVt+4Xx6FHpvFHx+Vx/pPUoYql9QO+G9t3Y=", "Sternytskyi", 1 });
+
+            migrationBuilder.InsertData(
+                table: "BookBorrowings",
+                columns: new[] { "Id", "BookId", "BorrowingDate", "ReturnDate", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 2, new DateTime(2024, 5, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, 3, new DateTime(2024, 6, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 3, 4, new DateTime(2024, 6, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 4, 2, new DateTime(2024, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), null, 1 },
+                    { 5, 1, new DateTime(2024, 5, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 6, 5, new DateTime(2024, 7, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 8, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 7, 6, new DateTime(2024, 8, 1, 16, 0, 0, 0, DateTimeKind.Unspecified), null, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -537,8 +563,13 @@ namespace EBookMasterWebApi.Migrations
                 column: "BookBorrowingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_SubscriptionId",
+                name: "IX_Users_UserSubscriptionId",
                 table: "Users",
+                column: "UserSubscriptionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSubscriptions_SubscriptionId",
+                table: "UserSubscriptions",
                 column: "SubscriptionId");
         }
 
@@ -586,6 +617,9 @@ namespace EBookMasterWebApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Series");
+
+            migrationBuilder.DropTable(
+                name: "UserSubscriptions");
 
             migrationBuilder.DropTable(
                 name: "Subscriptions");

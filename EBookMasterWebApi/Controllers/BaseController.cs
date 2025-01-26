@@ -37,7 +37,10 @@ namespace EBookMasterWebApi.Controllers
 		protected async Task<User> GetCurrentUserAsync()
 		{
 			var userId = GetCurrentUserId();
-			var user = await _context.Users.Include(x => x.Subscription).FirstOrDefaultAsync(x => x.Id == userId);
+			var user = await _context.Users
+				.Include(x => x.UserSubscription)
+					.ThenInclude(x => x.Subscription)
+				.FirstOrDefaultAsync(x => x.Id == userId);
 			if (user == null)
 				throw new InvalidOperationException("User not found.");
 			return user;
@@ -51,10 +54,18 @@ namespace EBookMasterWebApi.Controllers
 			if (registerRequest.SubscriptionId == 0)
 				throw new InvalidOperationException("No subscription chosen.");
 
+			var subscription = await _context.Subscriptions.FirstAsync(x => x.Id == registerRequest.SubscriptionId);
+			var userSubscription = new UserSubscription
+			{
+				SubscriptionId = subscription.Id,
+				BeginDate = DateTime.Now,
+				EndDate = subscription.Period == SubscriptionPeriod.Annual ? DateTime.Now.AddYears(1) : DateTime.Now.AddMonths(1)
+			};
+
 			var user = _mapper.Map<User>(registerRequest);
 			user.Role = Role.Reader;
 			user.LibraryCardNumber = await GetNexLibraryCardNumberAsync();
-			user.Subscription = await _context.Subscriptions.FirstAsync(x => x.Id == registerRequest.SubscriptionId);
+			user.UserSubscription = userSubscription;
 			user.Password = _accountsService.HashPassword(registerRequest.Password, user.Salt = _accountsService.GenerateSalt());
 			user.RefreshToken = _accountsService.GenerateSalt();
 			user.RefreshTokenExpiration = DateTime.Now.AddHours(1);
