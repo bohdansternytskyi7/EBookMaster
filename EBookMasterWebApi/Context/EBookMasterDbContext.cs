@@ -183,6 +183,8 @@ namespace EBookMasterWebApi.Context
 				var index = 1;
 				e.HasData(
 					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 5, 20, 10, 0, 0), ReturnDate = new DateTime(2024, 6, 20, 10, 0, 0), BookId = 2, UserId = 1 },
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 7, 21, 10, 0, 0), ReturnDate = new DateTime(2024, 8, 25, 10, 0, 0), BookId = 2, UserId = 1 },
+					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 11, 11, 10, 0, 0), ReturnDate = null, BookId = 2, UserId = 1 },
 					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 6, 1, 11, 0, 0), ReturnDate = new DateTime(2024, 7, 1, 11, 0, 0), BookId = 3, UserId = 1 },
 					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 6, 10, 12, 0, 0), ReturnDate = new DateTime(2024, 7, 10, 12, 0, 0), BookId = 4, UserId = 1 },
 					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 7, 5, 13, 0, 0), ReturnDate = null, BookId = 2, UserId = 1 },

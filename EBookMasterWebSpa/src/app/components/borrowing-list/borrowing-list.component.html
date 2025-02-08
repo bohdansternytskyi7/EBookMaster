@@ -1,0 +1,21 @@
+<mat-dialog-content>
+  <mat-list>
+    <table>
+      <thead>
+        <tr>
+          <th>Data wypożyczenia</th>
+          <th>Data zwrotu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let borrowing of borrowings">
+          <td>{{ borrowing.borrowingDate | date: 'dd-MM-yyyy HH:mm' }}</td>
+          <td>{{ borrowing.returnDate | date: 'dd-MM-yyyy HH:mm' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-list>
+</mat-dialog-content>
+<div class="actions">
+  <button  mat-dialog-close class="btn-close">Close</button>
+</div>

@@ -487,12 +487,14 @@ namespace EBookMasterWebApi.Migrations
                 values: new object[,]
                 {
                     { 1, 2, new DateTime(2024, 5, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 20, 10, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, 3, new DateTime(2024, 6, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 3, 4, new DateTime(2024, 6, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 4, 2, new DateTime(2024, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), null, 1 },
-                    { 5, 1, new DateTime(2024, 5, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 6, 5, new DateTime(2024, 7, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 8, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 7, 6, new DateTime(2024, 8, 1, 16, 0, 0, 0, DateTimeKind.Unspecified), null, 1 }
+                    { 2, 2, new DateTime(2024, 7, 21, 10, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 8, 25, 10, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 3, 2, new DateTime(2024, 11, 11, 10, 0, 0, 0, DateTimeKind.Unspecified), null, 1 },
+                    { 4, 3, new DateTime(2024, 6, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 5, 4, new DateTime(2024, 6, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 10, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 6, 2, new DateTime(2024, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), null, 1 },
+                    { 7, 1, new DateTime(2024, 5, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 8, 5, new DateTime(2024, 7, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 8, 20, 15, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 9, 6, new DateTime(2024, 8, 1, 16, 0, 0, 0, DateTimeKind.Unspecified), null, 1 }
                 });
 
             migrationBuilder.InsertData(

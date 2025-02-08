@@ -10,6 +10,7 @@
 		public ICollection<AuthorDTO> Authors { get; set; }
 		public ICollection<CategoryDTO> Categories { get; set; }
 		public ICollection<RecommendationDTO> Recommendations { get; set; }
+		public ICollection<BookBorrowingDTO> BookBorrowings { get; set; }
 		public bool Borrowed { get; set; }
 		public bool NotAllowed { get; set; }
 		public bool IsPremium { get; set; }

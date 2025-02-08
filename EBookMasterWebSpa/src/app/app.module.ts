@@ -18,6 +18,8 @@ import { InfoDialogComponent } from './components/info-dialog/info-dialog.compon
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list'
+import { BorrowingListComponent } from './components/borrowing-list/borrowing-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { MatButtonModule } from '@angular/material/button';
     HomePageComponent,
     BorrowingPageComponent,
     BookPageComponent,
-    InfoDialogComponent
+    InfoDialogComponent,
+    BorrowingListComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     NoopAnimationsModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatListModule
   ],
   providers: [
     AuthService,

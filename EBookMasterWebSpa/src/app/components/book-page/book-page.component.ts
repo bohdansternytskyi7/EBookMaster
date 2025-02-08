@@ -5,6 +5,8 @@ import { BorrowingService } from 'src/app/services/borrowing.service';
 import { Author } from '../models/author';
 import { Category } from '../models/category';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { BorrowingListComponent } from '../borrowing-list/borrowing-list.component';
 
 @Component({
   selector: 'app-book-page',
@@ -20,6 +22,7 @@ export class BookPageComponent implements OnInit, OnDestroy {
   filter: string = '';
 
   constructor(
+    public dialog: MatDialog,
     private authService: AuthService,
     private borrowingService: BorrowingService
   ) { }
@@ -61,5 +64,11 @@ export class BookPageComponent implements OnInit, OnDestroy {
       || book.series?.name.toLowerCase().includes(query)
       || book.publishingHouse.name.toLowerCase().includes(query)
     );
+  }
+
+  openDialog(book: Book): void {
+    this.dialog.open(BorrowingListComponent, {
+      data: book.bookBorrowings
+    });
   }
 }

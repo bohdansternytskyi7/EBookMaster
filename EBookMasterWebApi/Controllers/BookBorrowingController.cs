@@ -34,6 +34,7 @@ namespace EBookMasterWebApi.Controllers
 				.Include(x => x.Series)
 				.Include(x => x.Authors)
 				.Include(x => x.Categories)
+				.Include(x => x.BookBorrowings)
 				.Where(x => x.Status == BookStatus.Available)
 				.ToListAsync());
 

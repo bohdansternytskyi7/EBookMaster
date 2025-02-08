@@ -10,7 +10,7 @@ body {
   margin: 0;
 }
 
-.btn-borrow, .btn-books, .btn-info, .btn-close {
+.btn-borrow, .btn-books, .btn-info, .btn-close, .btn-info {
   color: white;
   padding: 0.8rem 1.2rem;
   font-size: 1rem;
@@ -40,6 +40,14 @@ body {
     &:hover {
       transform: none;
     }
+  }
+}
+
+.btn-info {
+  background-color: $grey-color;
+
+  &:hover {
+    background-color: $grey-darker-color;
   }
 }
 

@@ -1,8 +1,10 @@
 $primary-color: #0075f3;
-$primary-darker-color: darken(#0075f3, 10%);
+$primary-darker-color: darken($primary-color, 10%);
 $orange-color: #ffa811;
-$orange-darker-color: darken(#ffae22, 10%);
+$orange-darker-color: darken($orange-color, 10%);
 $red-color: #dc3545;
-$red-darker-color: darken(#dc3545, 10%);
+$red-darker-color: darken($red-color, 10%);
+$grey-color: #9b9b9b;
+$grey-darker-color: darken($grey-color, 10%);
 $border-radius: 5px;
 $box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
