@@ -39,11 +39,10 @@ namespace EBookMasterWebApi.Controllers
 				.ToListAsync());
 
 			var userId = GetCurrentUserId();
-			var borrowings = await _context.BookBorrowings.Where(x => x.UserId == userId).ToListAsync();
-
 			booksDTO.ForEach(x =>
 			{
-				x.Borrowed = borrowings.Exists(y => !y.ReturnDate.HasValue && y.BookId == x.Id);
+				x.BookBorrowings = x.BookBorrowings.Where(y => y.UserId == userId).ToList();
+				x.Borrowed = x.BookBorrowings.Any(y => !y.ReturnDate.HasValue);
 				x.NotAllowed = false;
 			});
 

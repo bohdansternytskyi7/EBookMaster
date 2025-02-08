@@ -29,7 +29,7 @@
         <td>{{ book.publishingHouse.name }} ({{ book.publishingHouse.country }})</td>
         <td><p [class.premium]="book.isPremium">{{ book.isPremium ? 'Premium' : '' }}</p></td>
         <td><button class="btn-borrow" [class.return]="book.borrowed" [disabled]="book.notAllowed || (book.isPremium && !userIsPremium)" (click)="toggleBorrow(book)">{{ book.borrowed ? 'Zwróć' : 'Wypożycz' }}</button></td>
-        <td><button class="btn-info" (click)="openDialog(book)">Wypożyczenia</button></td>
+        <td><button class="btn-info" (click)="openDialog(book)" [disabled]="(book.bookBorrowings?.length ?? 0) <= 0">Wypożyczenia</button></td>
       </tr>
     </tbody>
   </table>

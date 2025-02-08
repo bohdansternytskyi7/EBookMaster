@@ -187,7 +187,6 @@ namespace EBookMasterWebApi.Context
 					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 11, 11, 10, 0, 0), ReturnDate = null, BookId = 2, UserId = 1 },
 					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 6, 1, 11, 0, 0), ReturnDate = new DateTime(2024, 7, 1, 11, 0, 0), BookId = 3, UserId = 1 },
 					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 6, 10, 12, 0, 0), ReturnDate = new DateTime(2024, 7, 10, 12, 0, 0), BookId = 4, UserId = 1 },
-					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 7, 5, 13, 0, 0), ReturnDate = null, BookId = 2, UserId = 1 },
 					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 5, 15, 14, 0, 0), ReturnDate = new DateTime(2024, 6, 15, 14, 0, 0), BookId = 1, UserId = 1 },
 					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 7, 20, 15, 0, 0), ReturnDate = new DateTime(2024, 8, 20, 15, 0, 0), BookId = 5, UserId = 1 },
 					new BookBorrowing { Id = index++, BorrowingDate = new DateTime(2024, 8, 1, 16, 0, 0), ReturnDate = null, BookId = 6, UserId = 1 }

@@ -37,8 +37,7 @@ namespace EBookMasterWebApi.Mapping
 			CreateMap<Recommendation, RecommendationDTO>()
 				.ForMember(x => x.RecommendedBooks, y => y.Ignore());
 
-			CreateMap<BookBorrowing, BookBorrowingDTO>()
-				.ForMember(x => x.Book, y => y.Ignore());
+			CreateMap<BookBorrowing, BookBorrowingDTO>();
 		}
 	}
 }

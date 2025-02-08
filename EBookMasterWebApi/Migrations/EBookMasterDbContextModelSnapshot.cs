@@ -473,13 +473,6 @@ namespace EBookMasterWebApi.Migrations
                         new
                         {
                             Id = 6,
-                            BookId = 2,
-                            BorrowingDate = new DateTime(2024, 7, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
                             BookId = 1,
                             BorrowingDate = new DateTime(2024, 5, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             ReturnDate = new DateTime(2024, 6, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
@@ -487,7 +480,7 @@ namespace EBookMasterWebApi.Migrations
                         },
                         new
                         {
-                            Id = 8,
+                            Id = 7,
                             BookId = 5,
                             BorrowingDate = new DateTime(2024, 7, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             ReturnDate = new DateTime(2024, 8, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
@@ -495,7 +488,7 @@ namespace EBookMasterWebApi.Migrations
                         },
                         new
                         {
-                            Id = 9,
+                            Id = 8,
                             BookId = 6,
                             BorrowingDate = new DateTime(2024, 8, 1, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1
